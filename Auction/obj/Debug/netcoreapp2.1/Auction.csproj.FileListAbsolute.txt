@@ -1,0 +1,14 @@
+D:\ASP\Auction\Auction\bin\Debug\netcoreapp2.1\Auction.deps.json
+D:\ASP\Auction\Auction\bin\Debug\netcoreapp2.1\Auction.runtimeconfig.json
+D:\ASP\Auction\Auction\bin\Debug\netcoreapp2.1\Auction.runtimeconfig.dev.json
+D:\ASP\Auction\Auction\bin\Debug\netcoreapp2.1\Auction.dll
+D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Auction.csprojAssemblyReference.cache
+D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Auction.csproj.CoreCompileInputs.cache
+D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Auction.RazorAssemblyInfo.cache
+D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Auction.RazorAssemblyInfo.cs
+D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Auction.AssemblyInfoInputs.cache
+D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Auction.AssemblyInfo.cs
+D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Auction.RazorTargetAssemblyInfo.cache
+D:\ASP\Auction\Auction\bin\Debug\netcoreapp2.1\Auction.pdb
+D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Auction.dll
+D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Auction.pdb
