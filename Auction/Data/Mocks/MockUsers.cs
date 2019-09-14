@@ -17,7 +17,9 @@ namespace Auction.Data.Mocks
                 {
                     new User
                     {
-                        name = "Valentine",
+                        name = "Валентин",
+                        phoneNumber = "+375291234567",
+                        city = "Брест",
                         image = "",
                         login = "komilfo",
                         password = "1312",

@@ -18,7 +18,6 @@ namespace Auction
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<ILots, MockLots>();
-            services.AddTransient<ICategories, MockCategories>();
             services.AddTransient<IUsers, MockUsers>();
             services.AddMvc();
         }

@@ -10,12 +10,10 @@ namespace Auction.Controllers
     public class LotsController : Controller
     {
         private readonly ILots allLots;
-        private readonly ICategories allCategories;
 
-        public LotsController(ILots iLots, ICategories iCategories)
+        public LotsController(ILots iLots)
         {
             allLots = iLots;
-            allCategories = iCategories;
         }
 
         public ViewResult LotsList()

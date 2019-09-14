@@ -13,7 +13,21 @@ namespace Auction.Data.Models
 
         public string desc { get; set; }
 
-        public ushort price { get; set; }
+        public ushort year { get; set; }
+
+        public ushort transmission { get; set; }
+
+        public double engineVolume { get; set; }
+
+        public ushort fuel { get; set; }
+
+        public ushort body { get; set; }
+
+        public ushort drive { get; set; }
+
+        public uint mileage { get; set; }
+
+        public uint price { get; set; }
 
         public string image { get; set; }
 
@@ -24,9 +38,5 @@ namespace Auction.Data.Models
         public DateTime ending { get; set; }
 
         public bool premium { get; set; }
-
-        public virtual Category category { get; set; }
-
-
     }
 }

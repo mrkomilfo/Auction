@@ -11,6 +11,10 @@ namespace Auction.Data.Models
 
         public string name { get; set; }
 
+        public string phoneNumber { get; set; }
+
+        public string city { get; set; }
+
         public string image { get; set; }
 
         public DateTime registration { get; set; }
