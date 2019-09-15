@@ -12,3 +12,15 @@ D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Auction.RazorTargetAssemblyInfo.c
 D:\ASP\Auction\Auction\bin\Debug\netcoreapp2.1\Auction.pdb
 D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Auction.dll
 D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Auction.pdb
+D:\ASP\Auction\Auction\bin\Debug\netcoreapp2.1\Auction.Views.dll
+D:\ASP\Auction\Auction\bin\Debug\netcoreapp2.1\Auction.Views.pdb
+D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Auction.TagHelpers.input.cache
+D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Auction.TagHelpers.output.cache
+D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Auction.RazorCoreGenerate.cache
+D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Razor\Views\Lots\LotsList.g.cshtml.cs
+D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Auction.RazorTargetAssemblyInfo.cs
+D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Auction.Views.pdb
+D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Auction.csproj.CopyComplete
+D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_Layout.g.cshtml.cs
+D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Razor\Views\_ViewImports.g.cshtml.cs
+D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Razor\Views\_ViewStart.g.cshtml.cs

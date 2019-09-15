@@ -1,4 +1,5 @@
 ﻿using Auction.Data.Interfaces;
+using Auction.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -18,8 +19,9 @@ namespace Auction.Controllers
 
         public ViewResult LotsList()
         {
-            var lots = allLots.Lots;
-            return View(lots);
+            LotsListViewModel obj = new LotsListViewModel();
+            obj.allLots = allLots.Lots;
+            return View(obj);
         }
     }
 }

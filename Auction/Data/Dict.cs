@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace Auction.Data
 {
-    public class Dict
+    public static class Dict
     {
-        public string[] fuel = { "бензин", "дизель", "электро" };
-        public string[] transmission = { "автомат", "механическая" };
-        public string[] body = { "внедорожник", "кабриолет", "купе", "лимузин", "лифтбек", "микроавтобус", "минивэн", "пикап", "родстер", "седан", "универсал", "хэтчбэк", "другой" };
-        public string[] drive = { "задний", "передний", "полный" };
+        public static string[] fuel = { "бензин", "дизель", "электро" };
+        public static string[] transmission = { "автомат", "механика" };
+        public static string[] body = { "внедорожник", "кабриолет", "купе", "лимузин", "лифтбек", "микроавтобус", "минивэн", "пикап", "родстер", "седан", "универсал", "хэтчбэк", "другой" };
+        public static string[] drive = { "задний", "передний", "полный" };
     }
 }
