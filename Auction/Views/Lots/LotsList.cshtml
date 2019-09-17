@@ -1,11 +1,19 @@
 ﻿<h2>Все лоты</h2>
+<div class="listing">
 @{
     foreach (var lot in Model.allLots)
     {
-        <div>
-            <h4>@lot.name</h4>
-            <p>@String.Format("{0}, {1}, {2} л., {3}, {4}, {5} км.", lot.year, transmission[lot.transmission], lot.engineVolume.ToString(System.Globalization.CultureInfo.GetCultureInfo("en-US")), fuel[lot.fuel], body[lot.body], lot.mileage)</p>
+        <div class="listing-item">
+            <div class="listing-item-image">
+                <img src="@lot.image" alt="@lot.name" width="180" height="134"/> 
+            </div>
+            <div class="listing-item-main">
+                <h3><a href="#">@lot.name</a></h3>
+                <p>@Model.shortDesc(lot)</p>
+                <b>@lot.price р.</b>
+            </div>
         </div>
     }
 }
+</div>
 

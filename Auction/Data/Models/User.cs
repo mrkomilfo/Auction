@@ -25,6 +25,8 @@ namespace Auction.Data.Models
 
         public bool admin { get; set; }
 
-        public List<Lot> lots { get; set; }
+        public List<int> lots { get; set; }
+
+        public List<int> bids { get; set; }
     }
 }

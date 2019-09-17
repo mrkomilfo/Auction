@@ -1,0 +1,43 @@
+﻿.listing {    
+    width: 100%;
+}
+
+.listing-item {
+    width: 100%;
+    border-collapse: collapse;
+    border: solid #ececec;
+    border-width: 1px 0 0;
+}
+
+.listing-item-image {
+    display: table-cell;
+    padding: 8px 16px 8px 8px;
+}
+
+.listing-item-image img{
+    cursor: pointer;
+    object-fit: cover;
+}
+
+.listing-item-main {
+    display: table-cell;
+    vertical-align: top;
+}
+
+.listing-item-main a {
+    color: #00bb00;
+    text-decoration: none;
+}
+
+.listing-item-main a:hover {
+    color: #008600;
+    text-decoration: underline;
+}
+
+.listing-item-main p {
+    color: #808080;
+}
+
+.listing-item-main b {
+    font-size: 18px;
+}

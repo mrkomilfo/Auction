@@ -19,7 +19,7 @@ namespace Auction.Data.Mocks
                     {
                         name = "Jeep Grand Cherokee WK2 Laredo",
                         desc = "Авто в идеальном состоянии, пробег родной, крашенных элементов нет",
-                        image = "/img/Jeep",
+                        image = "/img/Jeep.jpg",
                         year = 2011,
                         transmission = 0,
                         engineVolume = 3.6,
@@ -38,7 +38,7 @@ namespace Auction.Data.Mocks
                     {
                         name = "Skoda Octavia II",
                         desc = "В отличном техническом состоянии",
-                        image = "/img/Audi",
+                        image = "/img/Audi.jpg",
                         year = 2010,
                         transmission = 1,
                         engineVolume = 1.4,
@@ -57,7 +57,7 @@ namespace Auction.Data.Mocks
                     {
                         name = "SEAT Altea I",
                         desc = "В машине все работает, колеса 16, ТО до августа 2020г",
-                        image = "/img/Seat",
+                        image = "/img/Seat.jpg",
                         year = 2013,
                         transmission = 1,
                         engineVolume = 1.4,
@@ -76,7 +76,7 @@ namespace Auction.Data.Mocks
                     {
                         name = "Opel Insignia I cosmo",
                         desc = "Автомобиль в отличном состоянии. Технически исправен.Масло от замены до замены. Экономичный.",
-                        image = "/img/Opel",
+                        image = "/img/Opel.jpg",
                         year = 2011,
                         transmission = 0,
                         engineVolume = 2.0,
