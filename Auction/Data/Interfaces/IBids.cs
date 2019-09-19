@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Auction.Data.Interfaces
 {
-    public interface ILots
+    interface IBids
     {
-        IEnumerable<Lot> Lots { get; }
-        Lot getLot(int lotId);
+        IEnumerable<Bid> Bids { get; }
+        Bid getBid(int bidId);
     }
 }

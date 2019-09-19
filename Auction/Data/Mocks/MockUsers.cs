@@ -19,8 +19,6 @@ namespace Auction.Data.Mocks
                     {
                         name = "Валентин",
                         phoneNumber = "+375291234567",
-                        city = "Брест",
-                        image = "",
                         login = "komilfo",
                         password = "1312",
                         registration = new DateTime(2019, 9, 3, 19, 0, 0),

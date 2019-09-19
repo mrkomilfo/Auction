@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.1",
-    "signature": "2935036d9ad1c3ab9caaeffeb7446c5a82bc92ac"
+    "signature": "20aeff57b463f6cab5ad32b08008b22bee7ce6dd"
   },
   "compilationOptions": {
     "defines": [
@@ -24,6 +24,8 @@
     ".NETCoreApp,Version=v2.1": {
       "Auction/1.0.0": {
         "dependencies": {
+          "EntityFramework": "6.3.0-rc1-19458-04",
+          "JSON": "1.0.1",
           "Microsoft.AspNet.Mvc": "5.2.7",
           "Microsoft.AspNetCore.App": "2.1.1",
           "Microsoft.AspNetCore.Razor.Design": "2.1.2",
@@ -35,6 +37,18 @@
         },
         "compile": {
           "Auction.dll": {}
+        }
+      },
+      "EntityFramework/6.3.0-rc1-19458-04": {},
+      "JSON/1.0.1": {
+        "runtime": {
+          "lib/net40/Json.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        },
+        "compile": {
+          "lib/net40/Json.dll": {}
         }
       },
       "Microsoft.AspNet.Mvc/5.2.7": {
@@ -3529,6 +3543,20 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "EntityFramework/6.3.0-rc1-19458-04": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-L8+NxTNSB7Dtz1WgswZtxKmCbN9rq0dwsR4dUoRr7y7+bj4X8Bo5iMRxx+tBnxsDZ56V9QAXaIH5OLy1EkxzDA==",
+      "path": "entityframework/6.3.0-rc1-19458-04",
+      "hashPath": "entityframework.6.3.0-rc1-19458-04.nupkg.sha512"
+    },
+    "JSON/1.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-n387Xh1oDWolCIVb2oMV1bWkEKBBk5iLkMuaiAQuLUaAZwowyym2s/6b/hFnmS5J3bzINmZ7I2WEbBAZMQd2dg==",
+      "path": "json/1.0.1",
+      "hashPath": "json.1.0.1.nupkg.sha512"
     },
     "Microsoft.AspNet.Mvc/5.2.7": {
       "type": "package",

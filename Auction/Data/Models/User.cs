@@ -13,10 +13,6 @@ namespace Auction.Data.Models
 
         public string phoneNumber { get; set; }
 
-        public string city { get; set; }
-
-        public string image { get; set; }
-
         public DateTime registration { get; set; }
 
         public string login { get; set; }
@@ -25,8 +21,8 @@ namespace Auction.Data.Models
 
         public bool admin { get; set; }
 
-        public List<int> lots { get; set; }
+        public List<Lot> lots { get; set; }
 
-        public List<int> bids { get; set; }
+        public List<Bid> bids { get; set; }
     }
 }

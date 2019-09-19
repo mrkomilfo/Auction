@@ -33,10 +33,12 @@ namespace Auction.Data.Models
 
         public DateTime exposing { get; set; }
 
-        public DateTime lastBid { get; set; }
-
         public DateTime ending { get; set; }
 
         public bool premium { get; set; }
+
+        public User user { get; set; }
+
+        public List<Bid> bids { get; set; }
     }
 }

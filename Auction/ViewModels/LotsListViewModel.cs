@@ -22,5 +22,18 @@ namespace Auction.ViewModels
                 body[lot.body], 
                 lot.mileage);
         }
+
+        public string timeLeft(DateTime end)
+        {
+            TimeSpan left = end - DateTime.Now;
+            if (left.TotalDays > 0)
+                return ((int)left.TotalDays).ToString() + " дней";
+            else if (left.TotalHours > 0)
+                return ((int)left.TotalHours).ToString() + " часов";
+            else if (left.TotalMinutes > 0)
+                return ((int)left.TotalHours).ToString() + " минут";
+            else
+                return "меньше минуты";
+        }
     }
 }

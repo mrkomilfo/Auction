@@ -1,0 +1,21 @@
+﻿<div class="listing">
+    @{
+        foreach (var lot in Model.allLots)
+        {
+            <div class=@(lot.premium ? "listing-item-prem" : "listing-item")>
+                <div class="listing-item-image">
+                    <img src="@lot.image" alt="@lot.name" width="180" height="134" />
+                </div>
+                <div class="listing-item-main">
+                    <p class="listing-item-main-top"><a href="#">@lot.name</a> @{if (lot.premium)
+                        {<span> premium </span>} }</p>
+                    <p class="listing-item-main-desc">@Model.shortDesc(lot)</p>
+                    <p class="listing-item-main-price">@lot.price р.</p>
+                </div>
+                <div class="listing-item-right">
+                    <p>До завершения: @Model.timeLeft(lot.ending)</p>
+                </div>
+            </div>
+        }
+    }
+</div>

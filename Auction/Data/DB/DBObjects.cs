@@ -1,20 +1,23 @@
-﻿using Auction.Data.Interfaces;
-using Auction.Data.Models;
+﻿using Auction.Data.Models;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Auction.Data.Mocks
+namespace Auction.Data.DB
 {
-    public class MockLots : ILots
+    public class DBObjects
     {
-        public IEnumerable<Lot> Lots
+        public static void Initial(AppDBContent content)
         {
-            get
+            if (!content.User.Any())
+                content.User.AddRange(Users.Select(u=>u.Value));
+
+            if (!content.Lot.Any())
             {
-                return new List<Lot>
-                {
+                content.AddRange(
                     new Lot
                     {
                         name = "Jeep Grand Cherokee WK2 Laredo",
@@ -31,6 +34,7 @@ namespace Auction.Data.Mocks
                         premium = true,
                         exposing = new DateTime(2019, 9, 2, 23, 0, 0),
                         ending = new DateTime(2019, 10, 2, 23, 0, 0),
+                        user = Users["komilfo"]
                     },
 
                     new Lot
@@ -49,6 +53,7 @@ namespace Auction.Data.Mocks
                         premium = false,
                         exposing = new DateTime(2019, 9, 2, 23, 0, 0),
                         ending = new DateTime(2019, 10, 2, 23, 0, 0),
+                        user = Users["komilfo"]
                     },
 
                     new Lot
@@ -67,6 +72,7 @@ namespace Auction.Data.Mocks
                         premium = true,
                         exposing = new DateTime(2019, 9, 2, 23, 0, 0),
                         ending = new DateTime(2019, 10, 2, 23, 0, 0),
+                        user = Users["komilfo"]
                     },
 
                     new Lot
@@ -85,14 +91,56 @@ namespace Auction.Data.Mocks
                         premium = true,
                         exposing = new DateTime(2019, 9, 2, 23, 0, 0),
                         ending = new DateTime(2019, 10, 2, 23, 0, 0),
-                    },
-                };
-            }
+                        user = Users["komilfo"]
+                    }
+                );
+            }          
+
+            /* if(!content.Bids.Any())
+            {
+                content.AddRange(
+                    new Bid
+                    {
+                        id = 1,
+                        time = new DateTime(2019, 9, 17, 15, 33, 0),
+                        increase = 10,
+                        userId = 1,
+                        lotId = 1,
+                    }
+                );
+            }*/
+
+            content.SaveChanges();
         }
 
-        public Lot getLot(int lotId)
+        private static Dictionary<string, User> user;
+        public static Dictionary<string, User> Users
         {
-            throw new NotImplementedException();
+            get
+            {
+                if (user == null)
+                {
+                    var list = new User[]
+                    {
+                        new User
+                        {
+                            name = "Валентин",
+                            phoneNumber = "+375291234567",
+                            login = "komilfo",
+                            password = "1312",
+                            registration = new DateTime(2019, 9, 3, 19, 0, 0),
+                            admin = true
+                        },
+                    };
+
+                    user = new Dictionary<string, User>();
+                    foreach (User u in list)
+                        user.Add(u.login, u);
+                }
+                return user;
+            }
+
+            
         }
     }
 }
