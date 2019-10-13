@@ -14,7 +14,7 @@
     border-collapse: collapse;
     border: solid #ececec;
     border-width: 1px 0 0;
-    background-color: #ffff88;
+    background-color: #ffff88;  
 }
 
 .listing-item-image {
@@ -39,6 +39,11 @@
     text-decoration: none;
 }
 
+.listing-item-main-top a:hover {
+    color: #008600;
+    text-decoration: underline;
+}
+
 .listing-item-main-top span {
     background-color: yellow;
     border: 1px solid black;
@@ -46,11 +51,6 @@
     margin-left: 20px;
     border-radius: 3px;
     white-space: pre;
-}
-
-.listing-item-main-top a:hover {
-    color: #008600;
-    text-decoration: underline;
 }
 
 .listing-item-main-desc {

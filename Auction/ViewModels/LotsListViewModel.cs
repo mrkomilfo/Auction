@@ -27,13 +27,15 @@ namespace Auction.ViewModels
         {
             TimeSpan left = end - DateTime.Now;
             if (left.TotalDays > 0)
-                return ((int)left.TotalDays).ToString() + " дней";
+                return ("До завершения " + (int)left.TotalDays).ToString() + " дн.";
             else if (left.TotalHours > 0)
-                return ((int)left.TotalHours).ToString() + " часов";
+                return ("До завершения " + (int)left.TotalHours).ToString() + " ч.";
             else if (left.TotalMinutes > 0)
-                return ((int)left.TotalHours).ToString() + " минут";
+                return ("До завершения " + (int)left.TotalHours).ToString() + " мин.";
+            else if (left.TotalSeconds > 0)
+                return "До завершения меньше минуты";
             else
-                return "меньше минуты";
+                return "Торги завершены";
         }
     }
 }

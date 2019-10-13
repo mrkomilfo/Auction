@@ -17,12 +17,12 @@ namespace Auction.Data.DB
 
             if (!content.Lot.Any())
             {
-                content.AddRange(
+                content.Lot.AddRange(
                     new Lot
                     {
                         name = "Jeep Grand Cherokee WK2 Laredo",
                         desc = "Авто в идеальном состоянии, пробег родной, крашенных элементов нет",
-                        image = "/img/Jeep.jpg",
+                        image = "/img/car_1.jpg",
                         year = 2011,
                         transmission = 0,
                         engineVolume = 3.6,
@@ -41,7 +41,7 @@ namespace Auction.Data.DB
                     {
                         name = "Skoda Octavia II",
                         desc = "В отличном техническом состоянии",
-                        image = "/img/Audi.jpg",
+                        image = "/img/car_2.jpg",
                         year = 2010,
                         transmission = 1,
                         engineVolume = 1.4,
@@ -60,7 +60,7 @@ namespace Auction.Data.DB
                     {
                         name = "SEAT Altea I",
                         desc = "В машине все работает, колеса 16, ТО до августа 2020г",
-                        image = "/img/Seat.jpg",
+                        image = "/img/car_3.jpg",
                         year = 2013,
                         transmission = 1,
                         engineVolume = 1.4,
@@ -79,7 +79,7 @@ namespace Auction.Data.DB
                     {
                         name = "Opel Insignia I cosmo",
                         desc = "Автомобиль в отличном состоянии. Технически исправен.Масло от замены до замены. Экономичный.",
-                        image = "/img/Opel.jpg",
+                        image = "/img/car_4.jpg",
                         year = 2011,
                         transmission = 0,
                         engineVolume = 2.0,

@@ -1,0 +1,39 @@
+﻿.nav-list {
+    display: inline-table;
+    height: 42px;
+    margin: 0px;
+}
+
+.nav-item {
+    display: inline-block;
+    padding-bottom: 0px;    
+}
+
+.nav-item:hover {
+    background: linear-gradient(to top, #ffffffff 0%, #A7D50000 50%);
+}
+
+.nav-ref {
+    text-decoration: none;
+    line-height: 42px;
+    font-family: Calibri;
+    font-size: 20px;
+    color: black;
+}
+
+.nav-ref div{
+    padding: 0px 10px;
+}
+
+header{
+}
+
+nav {
+    background-color: #A7D500;
+    margin-bottom: 4px
+}
+
+body {
+    margin: 0px;
+}
+

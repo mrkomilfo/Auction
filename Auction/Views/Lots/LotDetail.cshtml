@@ -1,0 +1,70 @@
+﻿@model LotDetailViewModel
+
+<div class="body">
+    <div class="header">
+        <div class="header-name">@Model.lot.name</div>
+        <div class="header-time">@Model.timeLeft(Model.lot.ending)</div>
+    </div>
+    <br/>
+    <div class="main">
+        <div class="image">
+            <img src="@Model.lot.image" alt="@Model.lot.name" width="480" height="358" />
+        </div>
+        <div class="short-desc">
+            <table id="table-left" border="0" cellspacing="10" height="358">
+                <tr>
+                    <td class="short-desc-title">Год выпуска:</td>
+                    <td class="short-desc-data">@Model.lot.year г.</td>
+                </tr>
+                <tr>
+                    <td class="short-desc-title">Коробка:</td>
+                    <td class="short-desc-data">@transmission[Model.lot.transmission]</td>
+                </tr>
+                <tr>
+                    <td class="short-desc-title">Объём двигателя:</td>
+                    <td class="short-desc-data">@Model.lot.engineVolume л.</td>
+                </tr>
+                <tr>
+                    <td class="short-desc-title">Топливо:</td>
+                    <td class="short-desc-data">@fuel[Model.lot.fuel]</td>
+                </tr>
+                <tr>
+                    <td class="short-desc-title">Кузов:</td>
+                    <td class="short-desc-data">@body[Model.lot.body]</td>
+                </tr>
+                <tr>
+                    <td class="short-desc-title">Пробег:</td>
+                    <td class="short-desc-data">@Model.lot.mileage км.</td>
+                </tr>
+            </table>
+            <table id="table-right" border="0" cellspacing="10" height="239">
+                <tr>
+                    <td class="short-desc-title">Владелец:</td>
+                    <td class="short-desc-data"><a href="https://localhost:44391/Users/UserInfo?id=@Model.lot.user.id">@Model.lot.user.name</a></td>
+                </tr>
+                <tr>
+                    <td class="short-desc-title">Дата выставления:</td>
+                    <td class="short-desc-data">@Model.lot.exposing</td>
+                </tr>
+                <tr>
+                    <td class="short-desc-title">Дата завершения:</td>
+                    <td class="short-desc-data">@Model.lot.ending</td>
+                </tr>
+                <tr>
+                    <td class="short-desc-title">Стоимость:</td>
+                    <td class="short-desc-data">@Model.lot.price р.</td>
+                </tr>
+            </table>
+        </div>
+    </div>   
+    <div class="main-desc">
+        <p class="main-desc-title">Описание лота:</p>
+        <p class="main-desc-data">@Model.lot.desc</p>
+    </div>
+    <div>
+        <div>
+        </div>
+        <div>
+        </div>
+    </div>
+</div>

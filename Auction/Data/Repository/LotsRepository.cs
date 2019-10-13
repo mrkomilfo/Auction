@@ -17,10 +17,10 @@ namespace Auction.Data.Repository
             this.appDBContent = appDBContent;
         }
 
-        public IEnumerable<Lot> Lots => appDBContent.Lot;
+        public IEnumerable<Lot> Lots => appDBContent.Lot.Include(l=>l.user);
 
         //public IEnumerable<Lot> premLots => appDBContent.Lot.Where(l => l.premium);
 
-        public Lot getLot(int lotId) => appDBContent.Lot.FirstOrDefault(l => l.id == lotId);
+        public Lot getLot(int lotId) => appDBContent.Lot.Include(l => l.user).ThenInclude(l => l.bids).FirstOrDefault(l => l.id == lotId);
     }
 }

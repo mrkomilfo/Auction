@@ -18,6 +18,6 @@ namespace Auction.Data.Repository
 
         public IEnumerable<User> Users => appDBContent.User;
 
-        public User getUser(int lotId) => appDBContent.User.FirstOrDefault(u => u.id == lotId);
+        public User getUser(int userId) => appDBContent.User.FirstOrDefault(u => u.id == userId);
     }
 }

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Auction.Data;
 using Auction.Data.Interfaces;
-using Auction.Data.Mocks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -30,8 +29,8 @@ namespace Auction
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AppDBContent>(options => options.UseSqlServer(confString.GetConnectionString("DefaultConnection")));
-            services.AddTransient<ILots, LotsRepository>();
             services.AddTransient<IUsers, UsersRepository>();
+            services.AddTransient<ILots, LotsRepository>();            
             services.AddTransient<IBids, BidsRepository>();
             services.AddMvc();
             services.AddMemoryCache();
@@ -45,7 +44,12 @@ namespace Auction
             app.UseStatusCodePages();
             app.UseStaticFiles();
             app.UseSession();
-            app.UseMvcWithDefaultRoute();
+            //app.UseMvcWithDefaultRoute();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(name: "default", template: "{controller=Lots}/{action=LotsList}");
+                //routes.MapRoute(name: "detail", template: "{controller=Lots}/{action=LotDetail}/{id}");
+            });
 
             using (var scope = app.ApplicationServices.CreateScope())
             {

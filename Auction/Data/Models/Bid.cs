@@ -13,7 +13,11 @@ namespace Auction.Data.Models
 
         public uint increase { get; set; }
 
+        public int? lotid { get; set; }
+
         public Lot lot { get; set; }
+
+        public int? userid { get; set; }
 
         public User user { get; set; }
     }

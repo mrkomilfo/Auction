@@ -6,8 +6,38 @@
     <title>@ViewBag.Title</title>
     <!--link href="~/css/bootstrap.min.css" rel="stylesheet" type="text/css"-->
     <link href="~/css/LotsListStyles.css" rel="stylesheet" type="text/css">
+    <link href="~/css/HeaderStyles.css" rel="stylesheet" type="text/css">
+    <link href="~/css/LotDetailStyles.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+    <header>
+        <nav>
+            <div>
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a class="nav-ref" href="https://localhost:44391/Lots/LotsList">
+                            <div>Все лоты   </div>                           
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-ref" href="#">
+                            <div>Завершенные   </div>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-ref" href="#">
+                            <div>Личный кабинет   </div>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-ref" href="#">
+                            <div>Настройки   </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
     <main>
         @RenderBody()
     </main>

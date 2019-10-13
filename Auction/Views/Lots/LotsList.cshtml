@@ -7,12 +7,12 @@
                 <img src="@lot.image" alt="@lot.name" width="180" height="134"/> 
             </div>
             <div class="listing-item-main" >
-                <p class="listing-item-main-top"><a href="#">@lot.name</a> @{if (lot.premium) {<span> premium </span>} }</p>
+                <p class="listing-item-main-top"><a href="https://localhost:44391/Lots/LotDetail?id=@lot.id">@lot.name</a> @{if (lot.premium) {<span> premium </span>} }</p>
                 <p class="listing-item-main-desc">@Model.shortDesc(lot)</p>
                 <p class="listing-item-main-price">@lot.price р.</p>
             </div>
             <div class="listing-item-right">
-                <p>До завершения: @Model.timeLeft(lot.ending)</p>
+                <p>@Model.timeLeft(lot.ending)</p>
             </div>
         </div>
     }
