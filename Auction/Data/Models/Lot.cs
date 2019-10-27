@@ -37,10 +37,18 @@ namespace Auction.Data.Models
 
         public bool premium { get; set; }
 
-        public int? userid { get; set; }
-
         public User user { get; set; }
 
         public List<Bid> bids { get; set; }
+
+        public bool isActual()
+        {
+            if (DateTime.Now < ending)
+            {
+                return true;
+            }
+            else
+                return false;
+        }
     }
 }

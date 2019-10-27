@@ -9,6 +9,6 @@ namespace Auction.Data.Interfaces
     public interface IUsers
     {
         IEnumerable<User> Users { get; }
-        User getUser(int userId);
+        User getUser(string userId);
     }
 }

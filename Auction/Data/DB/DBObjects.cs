@@ -10,9 +10,9 @@ namespace Auction.Data.DB
 {
     public class DBObjects
     {
-        public static void Initial(AppDBContent content)
+        public static void Initial(AppDBContext content)
         {
-            if (!content.User.Any())
+            /*if (!content.User.Any())
                 content.User.AddRange(Users.Select(u=>u.Value));
 
             if (!content.Lot.Any())
@@ -96,20 +96,6 @@ namespace Auction.Data.DB
                 );
             }          
 
-            /* if(!content.Bids.Any())
-            {
-                content.AddRange(
-                    new Bid
-                    {
-                        id = 1,
-                        time = new DateTime(2019, 9, 17, 15, 33, 0),
-                        increase = 10,
-                        userId = 1,
-                        lotId = 1,
-                    }
-                );
-            }*/
-
             content.SaveChanges();
         }
 
@@ -124,21 +110,21 @@ namespace Auction.Data.DB
                     {
                         new User
                         {
-                            name = "Валентин",
-                            phoneNumber = "+375291234567",
-                            login = "komilfo",
-                            password = "1312",
-                            registration = new DateTime(2019, 9, 3, 19, 0, 0),
-                            admin = true
+                            UserName = "Админ",
+                            PhoneNumber = "+375291234567",
+                            Email = "admin@auction.io",                           
+                            //password = "1312",
+                            Registration = new DateTime(2019, 9, 3, 19, 0, 0),
+                            //admin = true
                         },
                     };
 
                     user = new Dictionary<string, User>();
                     foreach (User u in list)
-                        user.Add(u.login, u);
+                        user.Add(u.Email, u);
                 }
                 return user;
-            }
+            }*/
 
             
         }

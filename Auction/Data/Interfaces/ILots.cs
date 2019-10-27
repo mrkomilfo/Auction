@@ -8,7 +8,9 @@ namespace Auction.Data.Interfaces
 {
     public interface ILots
     {
-        IEnumerable<Lot> Lots { get; }
+        //IEnumerable<Lot> Lots { get; }
+        IEnumerable<Lot> ActualLots { get; }
+        IEnumerable<Lot> EndedLots { get; }
         Lot getLot(int lotId);
     }
 }

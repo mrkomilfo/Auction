@@ -1,23 +1,25 @@
 ﻿using Auction.Data.Interfaces;
 using Auction.Data.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Auction.Data.DB;
 
 namespace Auction.Data.Repository
 {
     public class UsersRepository : IUsers
     {
-        private readonly AppDBContent appDBContent;
+        private readonly ApplicationContext applicationContext;
 
-        public UsersRepository(AppDBContent appDBContent)
+        public UsersRepository(ApplicationContext applicationContext)
         {
-            this.appDBContent = appDBContent;
+            this.applicationContext = applicationContext;
         }
 
-        public IEnumerable<User> Users => appDBContent.User;
+        public IEnumerable<User> Users => applicationContext.Users.Include(u=>u.lots).Include(u => u.bids);
 
-        public User getUser(int userId) => appDBContent.User.FirstOrDefault(u => u.id == userId);
+        public User getUser(string userId) => applicationContext.Users.Include(u => u.lots).Include(u => u.bids).FirstOrDefault(u => u.Id == userId);
     }
 }

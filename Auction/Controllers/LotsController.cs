@@ -18,11 +18,19 @@ namespace Auction.Controllers
         }
 
         [HttpGet]
-        public ViewResult LotsList()
+        public ViewResult ActualLots()
         {
             LotsListViewModel obj = new LotsListViewModel();
-            obj.allLots = allLots.Lots;
-            return View(obj);
+            obj.allLots = allLots.ActualLots;
+            return View("LotsList", obj);
+        }
+
+        [HttpGet]
+        public ViewResult EndedLots()
+        {
+            LotsListViewModel obj = new LotsListViewModel();
+            obj.allLots = allLots.EndedLots;
+            return View("LotsList", obj);
         }
 
         [HttpGet]

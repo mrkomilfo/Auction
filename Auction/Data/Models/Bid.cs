@@ -11,13 +11,9 @@ namespace Auction.Data.Models
 
         public DateTime time { get; set; }
 
-        public uint increase { get; set; }
-
-        public int? lotid { get; set; }
+        public uint newPrice { get; set; }
 
         public Lot lot { get; set; }
-
-        public int? userid { get; set; }
 
         public User user { get; set; }
     }

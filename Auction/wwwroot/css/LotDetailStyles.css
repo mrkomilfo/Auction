@@ -1,77 +1,77 @@
-﻿.body {
+﻿.lot-body {
     padding: 8px 16px 0px 16px;
 }
 
-.header {
+.lot-header {
     display: flex;
     justify-content: space-between;
 }
 
-.header-name {
-   font-size: 32px;
-   font-weight:600;
+.lot-header-name {
+    font-size: 32px;
+    font-weight: 600;
 }
 
-.header-time {
+.lot-header-time {
     padding: 4px;
     font-size: 18px;
     color: #808080;
 }
 
-.main {
+.lot-main {
     display: flex;
 }
 
-.image {
+.lot-image {
     padding-right: 16px;
     width: 480px;
 }
 
-.image img {
+.lot-image img {
     object-fit: cover;
 }
 
-.short-desc {
+.lot-short-desc {
     display: flex;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     width: 100%;
 }
 
-#table-left {
+#lot-table-left {
     width: 50%;
     max-width: 390px;
     margin-right: auto;
 }
 
-#table-right {
+#lot-table-right {
     width: 50%;
     max-width: 420px;
 }
 
-.short-desc-title {
+.lot-short-desc-title {
     font-size: 22px;
 }
 
-.short-desc-data {
+.lot-short-desc-data {
     font-size: 19px;
 }
 
-.short-desc-data a {
+.lot-short-desc-data a {
     color: #00bb00;
     text-decoration: none;
 }
 
-.short-desc-data a:hover {
+.lot-short-desc-data a:hover {
     color: #008600;
     text-decoration: underline;
 }
 
-.main-desc {
+.lot-main-desc {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     width: 100%;
 }
 
-.main-desc-title {
+.lot-main-desc-title {
     font-size: 22px;
     margin: 10px 0px 10px 0px;
 }
@@ -79,4 +79,38 @@
 .main-desc-data {
     font-size: 18px;
     margin: 10px 0px 10px 0px;
+}
+
+.lot-bids{
+    width: 100%;
+    display: flex;
+}
+
+.lot-bids-table-div {
+    width: 60%;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.lot-bids table {
+    width: 100%;
+}
+
+.lot-bid-header {
+    background-color: #A7D500;
+    font-size: 16px;
+    height: 22px;
+    text-align: left;
+}
+
+.lot-bid-data {
+    background-color: #ffff88;
+    background-color: #A7D500;
+    height: 20px;
+    font-size: 16px;
+    text-align: left;
+}
+
+.lot-bid-null {
+    text-align:center;
+    font-size: 16px;
 }

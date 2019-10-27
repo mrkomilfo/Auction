@@ -19,12 +19,17 @@ using Auction.ViewModels;
 #line default
 #line hidden
 #line 2 "D:\ASP\Auction\Auction\Views\_ViewImports.cshtml"
+using Auction.Data.Models;
+
+#line default
+#line hidden
+#line 3 "D:\ASP\Auction\Auction\Views\_ViewImports.cshtml"
 using static Auction.Data.Dict;
 
 #line default
 #line hidden
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"5279aafed270be83b8167ce4c6d4ef71429cf9ab", @"/Views/Lots/LotsList.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"3779f770a43ad18f6122e2b5f0fa3cfa1a04b94b", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"430c3ca8a1ce235a3136523318be08de034a2690", @"/Views/_ViewImports.cshtml")]
     public class Views_Lots_LotsList : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998

@@ -1,25 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Auction.Data.Models
 {
-    public class User
+    public class User : IdentityUser
     {
-        public int id { get; set; }
-
-        public string name { get; set; }
-
-        public string phoneNumber { get; set; }
-
-        public DateTime registration { get; set; }
-
-        public string login { get; set; }
-
-        public string password { get; set; }
-
-        public bool admin { get; set; }
+        public DateTime Registration { get; set; }
 
         public List<Lot> lots { get; set; }
 

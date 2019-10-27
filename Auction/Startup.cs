@@ -7,34 +7,37 @@ using Auction.Data.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Auction.Data.Repository;
 using Auction.Data.DB;
+using Auction.Data.Models;
 
 namespace Auction
 {
     public class Startup
     {
-        private IConfigurationRoot confString;
+        public IConfiguration Configuration { get; }
 
-        public Startup(IHostingEnvironment hostEnv)
+        public Startup(IConfiguration configuration)
         {
-            confString = new ConfigurationBuilder().SetBasePath(hostEnv.ContentRootPath).AddJsonFile("dbsettings.json").Build();
+            Configuration = configuration;
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AppDBContent>(options => options.UseSqlServer(confString.GetConnectionString("DefaultConnection")));
+            string connection = Configuration.GetConnectionString("DefaultConnection");
+            services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(connection));
+            services.AddDbContext<AppDBContext>(options => options.UseSqlServer(connection));
             services.AddTransient<IUsers, UsersRepository>();
             services.AddTransient<ILots, LotsRepository>();            
             services.AddTransient<IBids, BidsRepository>();
+            services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<ApplicationContext>();
             services.AddMvc();
-            services.AddMemoryCache();
-            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,20 +45,21 @@ namespace Auction
         {
             app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseSession();
+            app.UseAuthentication();
             //app.UseMvcWithDefaultRoute();
             app.UseMvc(routes =>
             {
-                routes.MapRoute(name: "default", template: "{controller=Lots}/{action=LotsList}");
+                routes.MapRoute(name: "default", template: "{controller=Lots}/{action=ActualLots}");
                 //routes.MapRoute(name: "detail", template: "{controller=Lots}/{action=LotDetail}/{id}");
             });
 
-            using (var scope = app.ApplicationServices.CreateScope())
+            /*using (var scope = app.ApplicationServices.CreateScope())
             {
-                AppDBContent content = scope.ServiceProvider.GetRequiredService<AppDBContent>();
+                AppDBContext content = scope.ServiceProvider.GetRequiredService<AppDBContext>();
                 DBObjects.Initial(content);
-            }               
+            }*/               
         }
     }
 }

@@ -10,17 +10,17 @@ namespace Auction.Data.Repository
 {
     public class LotsRepository : ILots
     {
-        private readonly AppDBContent appDBContent;
+        private readonly AppDBContext appDBContent;
 
-        public LotsRepository(AppDBContent appDBContent)
+        public LotsRepository(AppDBContext appDBContent)
         {
             this.appDBContent = appDBContent;
         }
 
-        public IEnumerable<Lot> Lots => appDBContent.Lot.Include(l=>l.user);
+        public IEnumerable<Lot> ActualLots => appDBContent.Lots.Include(l => l.user).Where(l=>l.isActual());
 
-        //public IEnumerable<Lot> premLots => appDBContent.Lot.Where(l => l.premium);
+        public IEnumerable<Lot> EndedLots => appDBContent.Lots.Include(l => l.user).Where(l => !l.isActual());
 
-        public Lot getLot(int lotId) => appDBContent.Lot.Include(l => l.user).ThenInclude(l => l.bids).FirstOrDefault(l => l.id == lotId);
+        public Lot getLot(int lotId) => appDBContent.Lots.Include(l => l.user).Include(l => l.bids).FirstOrDefault(l => l.id == lotId);
     }
 }

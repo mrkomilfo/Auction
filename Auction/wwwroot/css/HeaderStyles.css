@@ -1,4 +1,10 @@
-﻿.nav-list {
+﻿.nav-bar {
+    display:flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.nav-list {
     display: inline-table;
     height: 42px;
     margin: 0px;
