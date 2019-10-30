@@ -10,8 +10,8 @@ namespace Auction.Data.Models
     {
         public DateTime Registration { get; set; }
 
-        public List<Lot> lots { get; set; }
+        public List<Lot> Lots { get; set; }
 
-        public List<Bid> bids { get; set; }
+        public List<Bid> Bids { get; set; }
     }
 }

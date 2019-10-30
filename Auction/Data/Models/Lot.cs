@@ -7,48 +7,41 @@ namespace Auction.Data.Models
 {
     public class Lot
     {
-        public int id { get; set; }
+        public int Id { get; set; }
 
-        public string name { get; set; }
+        public string Name { get; set; }
 
-        public string desc { get; set; }
+        public string Desc { get; set; }
 
-        public ushort year { get; set; }
+        public ushort Year { get; set; }
 
-        public ushort transmission { get; set; }
+        public ushort Transmission { get; set; }
 
-        public double engineVolume { get; set; }
+        public double EngineVolume { get; set; }
 
-        public ushort fuel { get; set; }
+        public ushort Fuel { get; set; }
 
-        public ushort body { get; set; }
+        public ushort Body { get; set; }
 
-        public ushort drive { get; set; }
+        public ushort Drive { get; set; }
 
-        public uint mileage { get; set; }
+        public uint Milleage { get; set; }
 
-        public uint price { get; set; }
+        public uint Price { get; set; }
 
-        public string image { get; set; }
+        public string Image { get; set; }
 
-        public DateTime exposing { get; set; }
+        public DateTime Exposing { get; set; }
 
-        public DateTime ending { get; set; }
+        public DateTime Ending { get; set; }
 
-        public bool premium { get; set; }
+        public User User { get; set; }
 
-        public User user { get; set; }
+        public List<Bid> Bids { get; set; }
 
-        public List<Bid> bids { get; set; }
-
-        public bool isActual()
+        public bool IsActual()
         {
-            if (DateTime.Now < ending)
-            {
-                return true;
-            }
-            else
-                return false;
+            return DateTime.Now < Ending ? true : false;
         }
     }
 }

@@ -1,0 +1,101 @@
+﻿@model Auction.ViewModels.ProfileViewModel
+
+<div class="profile-body">
+    <div class="lot-bids-table-div">
+        @if (Model.IsMy)
+        {
+            <p class="lot-main-desc-title">Мои лоты:</p>
+        }
+        else
+        {
+            <p class="lot-main-desc-title">Лоты пользователя:</p>
+        }
+        <table cellspacing="0" cellpadding="4">
+            <tr class="lot-bid-header">
+                <th>Название</th>
+                <th>Стоимость</th>
+                <th>Завершение</th>              
+            </tr>
+            @if (Model.User.Lots.Count > 0)
+            {
+                foreach (var lot in Model.User.Lots)
+                {
+                    <tr class="lot-bid-data">
+                        <td><a href="https://localhost:44391/Lots/LotDetail?id=@lot.Id">@lot.Name</a></td>
+                        <td>@lot.Price</td>
+                        <td>@lot.Ending</td>                    
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr class="lot-bid-null">
+                    <td colspan="3">Лотов пока нет</td>
+                </tr>
+            }
+
+        </table>
+    </div>
+    <div id="profile-desc">
+        <table border="0" cellspacing="10" height="358">
+            <tr>
+                <td class="lot-short-desc-title">Имя пользователя:</td>
+                <td class="lot-short-desc-data">@Model.User.UserName</td>
+            </tr>
+            <tr>
+                <td class="lot-short-desc-title">Email:</td>
+                <td class="lot-short-desc-data">@Model.User.Email</td>
+            </tr>
+            <tr>
+                <td class="lot-short-desc-title">Телефон:</td>
+                <td class="lot-short-desc-data">@(Model.User.PhoneNumber != null ? Model.User.PhoneNumber : "не указан")</td>
+            </tr>
+            <tr>
+                <td class="lot-short-desc-title">Зарегистрирован:</td>
+                <td class="lot-short-desc-data">@Model.User.Registration</td>
+            </tr>
+            @if (Model.IsMy)
+            {
+            <tr>
+                <td><button asp-action="Edit">Редактировать</button></td>
+                <td><button asp-action="ChangePassword">Изменить пароль</button></td>
+            </tr>
+            }
+        </table>
+    </div>
+    <div class="lot-bids-table-div">
+        @if (Model.IsMy)
+        {
+            <p class="lot-main-desc-title">Мои Ставки:</p>
+        }
+        else
+        {
+            <p class="lot-main-desc-title">Ставки пользователя:</p>
+        }
+        <table cellspacing="0" cellpadding="4">
+            <tr class="lot-bid-header">
+                <th>Лот</th>
+                <th>Размер ставки</th>             
+                <th>Время</th>
+            </tr>
+            @if (Model.User.Bids.Count > 0)
+            {
+                foreach (var bid in Model.User.Bids)
+                {
+                    <tr class="lot-bid-data">
+                        <td><a href="https://localhost:44391/Lots/LotDetail?id=@bid.Lot.Id">@bid.Lot.Name</a></td>                        
+                        <td>@bid.NewPrice</td>
+                        <td>@bid.Time</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr class="lot-bid-null">
+                    <td colspan="3">Ставок пока нет</td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>

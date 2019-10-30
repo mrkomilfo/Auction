@@ -11,5 +11,7 @@ namespace Auction.Data.DB
         {
             Database.EnsureCreated();
         }
+        public DbSet<Lot> Lots { get; set; }
+        public DbSet<Bid> Bids { get; set; }
     }
 }

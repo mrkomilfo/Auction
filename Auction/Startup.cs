@@ -20,10 +20,11 @@ namespace Auction
     public class Startup
     {
         public IConfiguration Configuration { get; }
-
-        public Startup(IConfiguration configuration)
+        public IHostingEnvironment env { get; set; }
+        public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
             Configuration = configuration;
+            this.env = env;
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -32,11 +33,18 @@ namespace Auction
         {
             string connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(connection));
-            services.AddDbContext<AppDBContext>(options => options.UseSqlServer(connection));
-            services.AddTransient<IUsers, UsersRepository>();
-            services.AddTransient<ILots, LotsRepository>();            
-            services.AddTransient<IBids, BidsRepository>();
-            services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<ApplicationContext>();
+            //services.AddDbContext<AppDBContext>(options => options.UseSqlServer(connection));
+            //services.AddTransient<IUsers, UsersRepository>();
+            //services.AddTransient<ILots, LotsRepository>();            
+            //services.AddTransient<IBids, BidsRepository>();
+            services.AddIdentity<User, IdentityRole>(opts => {
+                opts.Password.RequiredLength = 5;   // минимальная длина
+                opts.Password.RequireNonAlphanumeric = false;   // требуются ли не алфавитно-цифровые символы
+                opts.Password.RequireLowercase = false; // требуются ли символы в нижнем регистре
+                opts.Password.RequireUppercase = false; // требуются ли символы в верхнем регистре
+                opts.Password.RequireDigit = false; // требуются ли цифры
+            }).AddEntityFrameworkStores<ApplicationContext>();
+            services.AddSingleton<IHostingEnvironment>(env);
             services.AddMvc();
         }
 
@@ -51,8 +59,7 @@ namespace Auction
             //app.UseMvcWithDefaultRoute();
             app.UseMvc(routes =>
             {
-                routes.MapRoute(name: "default", template: "{controller=Lots}/{action=ActualLots}");
-                //routes.MapRoute(name: "detail", template: "{controller=Lots}/{action=LotDetail}/{id}");
+                routes.MapRoute(name: "default", template: "{controller=Lots}/{action=ActualLots}/{id?}");               
             });
 
             /*using (var scope = app.ApplicationServices.CreateScope())

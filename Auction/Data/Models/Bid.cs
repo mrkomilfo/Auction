@@ -7,14 +7,14 @@ namespace Auction.Data.Models
 {
     public class Bid
     {
-        public int id { get; set; }
+        public int Id { get; set; }
 
-        public DateTime time { get; set; }
+        public DateTime Time { get; set; }
 
-        public uint newPrice { get; set; }
+        public uint NewPrice { get; set; }
 
-        public Lot lot { get; set; }
+        public Lot Lot { get; set; }
 
-        public User user { get; set; }
+        public User User { get; set; }
     }
 }

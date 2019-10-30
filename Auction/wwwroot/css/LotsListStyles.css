@@ -9,14 +9,6 @@
     border-width: 1px 0 0;
 }
 
-.listing-item-prem {
-    width: 100%;
-    border-collapse: collapse;
-    border: solid #ececec;
-    border-width: 1px 0 0;
-    background-color: #ffff88;  
-}
-
 .listing-item-image {
     display: table-cell;
     padding: 8px 16px 8px 8px;
@@ -42,15 +34,6 @@
 .listing-item-main-top a:hover {
     color: #008600;
     text-decoration: underline;
-}
-
-.listing-item-main-top span {
-    background-color: yellow;
-    border: 1px solid black;
-    font-size: small;
-    margin-left: 20px;
-    border-radius: 3px;
-    white-space: pre;
 }
 
 .listing-item-main-desc {

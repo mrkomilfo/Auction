@@ -8,18 +8,18 @@ namespace Auction.ViewModels
 {
     public class LotDetailViewModel
     {
-        public Lot lot { get; set; }
+        public Lot Lot { get; set; }
 
-        public string timeLeft(DateTime end)
+        public string TimeLeft(DateTime end)
         {
             TimeSpan left = end - DateTime.Now;
-            if (left.TotalDays > 0)
+            if (left.TotalDays > 1)
                 return ("До завершения " + (int)left.TotalDays).ToString() + " дн.";
-            else if (left.TotalHours > 0)
+            else if (left.TotalHours > 1)
                 return ("До завершения " + (int)left.TotalHours).ToString() + " ч.";
-            else if (left.TotalMinutes > 0)
+            else if (left.TotalMinutes > 1)
                 return ("До завершения " + (int)left.TotalHours).ToString() + " мин.";
-            else if (left.TotalSeconds > 0)
+            else if (left.TotalSeconds > 1)
                 return "До завершения меньше минуты";
             else
                 return "Торги завершены";

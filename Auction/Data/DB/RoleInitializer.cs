@@ -10,6 +10,7 @@ namespace Auction
         {
             string adminEmail = "admin@gmail.com", userEmail = "user@gmail.com";
             string adminName = "Admin", userName = "User";
+            string adminPhone = "+375291234567", userPhone = "+375331234567";
             string adminPassword = "Qwerty_123", userPassword = "Abc_321";
             if (await roleManager.FindByNameAsync("admin") == null)
             {
@@ -21,7 +22,7 @@ namespace Auction
             }
             if (await userManager.FindByEmailAsync(adminEmail) == null)
             {
-                User admin = new User { Email = adminEmail, UserName = adminName };
+                User admin = new User { Email = adminEmail, UserName = adminName, PhoneNumber = adminPhone };
                 IdentityResult result = await userManager.CreateAsync(admin, adminPassword);
                 if (result.Succeeded)
                 {
@@ -30,7 +31,7 @@ namespace Auction
             }
             if (await userManager.FindByEmailAsync(adminEmail) == null)
             {
-                User user = new User { Email = userEmail, UserName = userName };
+                User user = new User { Email = userEmail, UserName = userName, PhoneNumber = userPhone };
                 IdentityResult result = await userManager.CreateAsync(user, userPassword);
                 if (result.Succeeded)
                 {

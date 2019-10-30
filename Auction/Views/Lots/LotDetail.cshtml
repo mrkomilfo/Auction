@@ -2,64 +2,64 @@
 
 <div class="lot-body">
     <div class="lot-header">
-        <div class="lot-header-name">@Model.lot.name</div>
-        <div class="lot-header-time">@Model.timeLeft(Model.lot.ending)</div>
+        <div class="lot-header-name">@Model.Lot.Name</div>
+        <div class="lot-header-time">@Model.TimeLeft(Model.Lot.Ending)</div>
     </div>
     <br/>
     <div class="lot-main">
         <div class="lot-image">
-            <img src="@Model.lot.image" alt="@Model.lot.name" width="480" height="358" />
+            <img src="@Model.Lot.Image" alt="@Model.Lot.Name" width="480" height="358" />
         </div>
         <div class="lot-short-desc">
             <table id="lot-table-left" border="0" cellspacing="10" height="358">
                 <tr>
                     <td class="lot-short-desc-title">Год выпуска:</td>
-                    <td class="lot-short-desc-data">@Model.lot.year г.</td>
+                    <td class="lot-short-desc-data">@Model.Lot.Year г.</td>
                 </tr>
                 <tr>
                     <td class="lot-short-desc-title">Коробка:</td>
-                    <td class="lot-short-desc-data">@transmission[Model.lot.transmission]</td>
+                    <td class="lot-short-desc-data">@transmission[Model.Lot.Transmission]</td>
                 </tr>
                 <tr>
                     <td class="lot-short-desc-title">Объём двигателя:</td>
-                    <td class="lot-short-desc-data">@Model.lot.engineVolume л.</td>
+                    <td class="lot-short-desc-data">@Model.Lot.EngineVolume л.</td>
                 </tr>
                 <tr>
                     <td class="lot-short-desc-title">Топливо:</td>
-                    <td class="lot-short-desc-data">@fuel[Model.lot.fuel]</td>
+                    <td class="lot-short-desc-data">@fuel[Model.Lot.Fuel]</td>
                 </tr>
                 <tr>
                     <td class="lot-short-desc-title">Кузов:</td>
-                    <td class="lot-short-desc-data">@body[Model.lot.body]</td>
+                    <td class="lot-short-desc-data">@body[Model.Lot.Body]</td>
                 </tr>
                 <tr>
                     <td class="lot-short-desc-title">Пробег:</td>
-                    <td class="lot-short-desc-data">@Model.lot.mileage км.</td>
+                    <td class="lot-short-desc-data">@Model.Lot.Milleage км.</td>
                 </tr>
             </table>
             <table id="lot-table-right" border="0" cellspacing="10" height="239">
                 <tr>
                     <td class="lot-short-desc-title">Владелец:</td>
-                    <td class="lot-short-desc-data"><a href="https://localhost:44391/Users/UserInfo?id=@Model.lot.user.Id">@Model.lot.user.UserName</a></td>
+                    <td class="lot-short-desc-data"><a asp-controller="Users" asp-action="Profile" asp-route-id="@Model.Lot.User.Id">@Model.Lot.User.UserName</a></td>
                 </tr>
                 <tr>
                     <td class="lot-short-desc-title">Дата выставления:</td>
-                    <td class="lot-short-desc-data">@Model.lot.exposing</td>
+                    <td class="lot-short-desc-data">@Model.Lot.Exposing</td>
                 </tr>
                 <tr>
                     <td class="lot-short-desc-title">Дата завершения:</td>
-                    <td class="lot-short-desc-data">@Model.lot.ending</td>
+                    <td class="lot-short-desc-data">@Model.Lot.Ending</td>
                 </tr>
                 <tr>
                     <td class="lot-short-desc-title">Стоимость:</td>
-                    <td class="lot-short-desc-data">@Model.lot.price р.</td>
+                    <td class="lot-short-desc-data">@Model.Lot.Price р.</td>
                 </tr>
             </table>
         </div>
     </div>   
     <div class="lot-main-desc">
         <p class="lot-main-desc-title">Описание лота:</p>
-        <p class="lot-main-desc-data">@Model.lot.desc</p>
+        <p class="lot-main-desc-data">@Model.Lot.Desc</p>
     </div>
     <div class="lot-bids">
         <div class="lot-bids-table-div">
@@ -71,15 +71,15 @@
                     <th>Новая цена</th>
                     <th>Время</th>
                 </tr>
-                @if (Model.lot.bids.Count > 0)
+                @if (Model.Lot.Bids.Count > 0)
                 {
-                    foreach (var bid in Model.lot.bids)
+                    foreach (var bid in Model.Lot.Bids)
                     {
                         <tr class="lot-bid-data">
-                            <td>@bid.id</td>
-                            <td>@bid.user.UserName</td>
-                            <td>@bid.newPrice</td>
-                            <td>@bid.time</td>
+                            <td>@bid.Id</td>
+                            <td>@bid.User.UserName</td>
+                            <td>@bid.NewPrice</td>
+                            <td>@bid.Time</td>
                         </tr>
                     }
                 }

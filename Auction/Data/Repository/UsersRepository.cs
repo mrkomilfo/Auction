@@ -18,8 +18,8 @@ namespace Auction.Data.Repository
             this.applicationContext = applicationContext;
         }
 
-        public IEnumerable<User> Users => applicationContext.Users.Include(u=>u.lots).Include(u => u.bids);
+        public IEnumerable<User> Users => applicationContext.Users.Include(u=>u.Lots).Include(u => u.Bids);
 
-        public User getUser(string userId) => applicationContext.Users.Include(u => u.lots).Include(u => u.bids).FirstOrDefault(u => u.Id == userId);
+        public User getUser(string userId) => applicationContext.Users.Include(u => u.Lots).Include(u => u.Bids).FirstOrDefault(u => u.Id == userId);
     }
 }

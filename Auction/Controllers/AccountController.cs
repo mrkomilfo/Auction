@@ -5,6 +5,7 @@ using Auction.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using System.Linq;
 using System;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Auction.Controllers
 {
@@ -97,7 +98,6 @@ namespace Auction.Controllers
                 }
             }
             return View(model);
-            //return RedirectToAction("ActualLots", "Lots");
         }
 
         [HttpPost]
@@ -107,6 +107,14 @@ namespace Auction.Controllers
             // удаляем аутентификационные куки
             await _signInManager.SignOutAsync();
             return RedirectToAction("Login", "Account");
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> MyProfile()
+        {
+            User currentUser = await _userManager.GetUserAsync(HttpContext.User);
+            return RedirectToAction("Profile", "Users", new { id = currentUser.Id });
         }
     }
 }

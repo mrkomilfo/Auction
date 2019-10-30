@@ -10,14 +10,15 @@ namespace Auction.Data.DB
 {
     public class DBObjects
     {
-        public static void Initial(AppDBContext content)
+        public static void Initial(ApplicationContext content)
         {
             /*if (!content.User.Any())
-                content.User.AddRange(Users.Select(u=>u.Value));
+                content.User.AddRange(Users.Select(u=>u.Value));*/
 
-            if (!content.Lot.Any())
+            /*if (!content.Lots.Any())
             {
-                content.Lot.AddRange(
+                User user = await userManager.FindByEmailAsync("admin@gmail.com");
+                content.Lots.AddRange(
                     new Lot
                     {
                         name = "Jeep Grand Cherokee WK2 Laredo",
@@ -96,10 +97,10 @@ namespace Auction.Data.DB
                 );
             }          
 
-            content.SaveChanges();
+            content.SaveChanges();*/
         }
 
-        private static Dictionary<string, User> user;
+        /*private static Dictionary<string, User> user;
         public static Dictionary<string, User> Users
         {
             get
@@ -124,9 +125,7 @@ namespace Auction.Data.DB
                         user.Add(u.Email, u);
                 }
                 return user;
-            }*/
-
-            
-        }
+            }          
+        }*/
     }
 }

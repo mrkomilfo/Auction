@@ -47,7 +47,9 @@
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li class="nav-item">
-                            <div>@User.Identity.Name</div>
+                            <a class="nav-ref" asp-controller="Account" asp-action="Edit">
+                                <div>@User.Identity.Name</div>
+                            </a>
                         </li>
                         <li class="nav-item">
                             <form method="post" asp-controller="Account" asp-action="LogOff">
@@ -68,7 +70,7 @@
                             </a>
                         </li>
                     }
-                    </ul>
+                </ul>
             </div>
         </nav>
     </header>

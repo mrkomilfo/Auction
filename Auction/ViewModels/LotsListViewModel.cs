@@ -10,29 +10,29 @@ namespace Auction.ViewModels
 {
     public class LotsListViewModel
     {
-        public IEnumerable<Lot> allLots { get; set; }
+        public IEnumerable<Lot> AllLots { get; set; }
 
-        public string shortDesc(Lot lot)
+        public string ShortDesc(Lot lot)
         {
             return String.Format("{0}, {1}, {2} л., {3}, {4}, {5} км.", 
-                lot.year, 
-                transmission[lot.transmission], 
-                lot.engineVolume.ToString(System.Globalization.CultureInfo.GetCultureInfo("en-US")), 
-                fuel[lot.fuel], 
-                body[lot.body], 
-                lot.mileage);
+                lot.Year, 
+                transmission[lot.Transmission], 
+                lot.EngineVolume.ToString(System.Globalization.CultureInfo.GetCultureInfo("en-US")), 
+                fuel[lot.Fuel], 
+                body[lot.Body], 
+                lot.Milleage);
         }
 
-        public string timeLeft(DateTime end)
+        public string TimeLeft(DateTime end)
         {
             TimeSpan left = end - DateTime.Now;
-            if (left.TotalDays > 0)
+            if (left.TotalDays > 1)
                 return ("До завершения " + (int)left.TotalDays).ToString() + " дн.";
-            else if (left.TotalHours > 0)
+            else if (left.TotalHours > 1)
                 return ("До завершения " + (int)left.TotalHours).ToString() + " ч.";
-            else if (left.TotalMinutes > 0)
+            else if (left.TotalMinutes > 1)
                 return ("До завершения " + (int)left.TotalHours).ToString() + " мин.";
-            else if (left.TotalSeconds > 0)
+            else if (left.TotalSeconds > 1)
                 return "До завершения меньше минуты";
             else
                 return "Торги завершены";

@@ -1,18 +1,19 @@
-﻿<div class="listing">
+﻿@model LotsListViewModel
+<div class="listing">
 @{
-    foreach (var lot in Model.allLots)
+    foreach (var lot in Model.AllLots)
     {
-        <div class= @(lot.premium ? "listing-item-prem" : "listing-item")>
+        <div class= "listing-item">
             <div class="listing-item-image">
-                <img src="@lot.image" alt="@lot.name" width="180" height="134"/> 
+                <img src="@lot.Image" alt="@lot.Name" width="180" height="134"/> 
             </div>
             <div class="listing-item-main" >
-                <p class="listing-item-main-top"><a href="https://localhost:44391/Lots/LotDetail?id=@lot.id">@lot.name</a> @{if (lot.premium) {<span> premium </span>} }</p>
-                <p class="listing-item-main-desc">@Model.shortDesc(lot)</p>
-                <p class="listing-item-main-price">@lot.price р.</p>
+                <p class="listing-item-main-top"><a href="https://localhost:44391/Lots/LotDetail?id=@lot.Id">@lot.Name</a></p>
+                <p class="listing-item-main-desc">@Model.ShortDesc(lot)</p>
+                <p class="listing-item-main-price">@lot.Price р.</p>
             </div>
             <div class="listing-item-right">
-                <p>@Model.timeLeft(lot.ending)</p>
+                <p>@Model.TimeLeft(lot.Ending)</p>
             </div>
         </div>
     }

@@ -34,3 +34,5 @@ D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Razor\Views\Roles\Index.g.cshtml.
 D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Razor\Views\Roles\Create.g.cshtml.cs
 D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Razor\Views\Roles\UserList.g.cshtml.cs
 D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Razor\Views\Roles\Edit.g.cshtml.cs
+D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Razor\Views\Users\Profile.g.cshtml.cs
+D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Razor\Views\Lots\Create.g.cshtml.cs
