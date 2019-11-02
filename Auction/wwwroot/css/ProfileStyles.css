@@ -1,4 +1,19 @@
-﻿profile-body {
+﻿#profile-body {
     display: flex;
     justify-content: space-between;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding: 0px 16px 0px 16px;
+}
+
+.desc-table-title {
+    font-size: 22px;
+}
+
+.desc-table-content {
+    font-size: 19px;
+}
+
+#profile-desc table{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    height:200px;
 }

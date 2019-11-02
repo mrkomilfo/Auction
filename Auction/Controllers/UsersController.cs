@@ -2,35 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Auction.Data.Interfaces;
 using Auction.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using Auction.Data.Models;
 using Auction.Data.DB;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Auction.Controllers
 {
     public class UsersController : Controller
     {
-        /*private readonly IUsers allUsers;
-
-        public UsersController(IUsers iUsers)
-        {
-            allUsers = iUsers;
-        }
-
-        [HttpGet]
-        public ViewResult UserInfo(string id)
-        {
-            UserInfoViewModel obj = new UserInfoViewModel
-            {
-                user = allUsers.getUser(id)
-            };
-            return View(obj);
-        }*/
-
         RoleManager<IdentityRole> _roleManager;
         UserManager<User> _userManager;
         ApplicationContext db;
@@ -42,8 +25,10 @@ namespace Auction.Controllers
             db = contex;
         }
 
+        [Authorize(Roles = "admin")]
         public IActionResult Index() => View(_userManager.Users.ToList());
 
+        [Authorize(Roles = "admin")]
         public IActionResult Create() => View();
 
         [HttpPost]
@@ -55,6 +40,7 @@ namespace Auction.Controllers
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    await _userManager.AddToRoleAsync(user, "user");
                     return RedirectToAction("Index");
                 }
                 else
@@ -68,7 +54,8 @@ namespace Auction.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> Edit(string id)
+        [Authorize(Roles = "admin")]
+        public async Task<IActionResult> Roles(string id)
         {
             User user = await _userManager.FindByIdAsync(id);
             if (user == null)
@@ -77,46 +64,42 @@ namespace Auction.Controllers
             }
             var userRoles = await _userManager.GetRolesAsync(user);
             var allRoles = _roleManager.Roles.ToList();
-            EditUserViewModel model = new EditUserViewModel
+            EditRolesViewModel model = new EditRolesViewModel
             {
                 Id = user.Id,
-                Email = user.Email,
+                /*Email = user.Email,
                 UserName = user.UserName,
-                PhoneNumber = user.PhoneNumber,
+                PhoneNumber = user.PhoneNumber,*/
                 UserRoles = userRoles,
                 AllRoles = allRoles
-            };
+            };         
             return View(model);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Edit(EditUserViewModel model, List<string> roles)
+        [HttpPost]       
+        public async Task<IActionResult> Roles(EditRolesViewModel model, List<string> roles)
         {
             if (ModelState.IsValid)
             {
                 User user = await _userManager.FindByIdAsync(model.Id);
                 if (user != null)
                 {
-                    user.Email = model.Email;
+                    /*user.Email = model.Email;
                     user.UserName = model.UserName;
-                    user.PhoneNumber = model.PhoneNumber;
+                    user.PhoneNumber = model.PhoneNumber;*/
                   
                     var userRoles = await _userManager.GetRolesAsync(user);
-                    // получаем все роли
                     var allRoles = _roleManager.Roles.ToList();
-                    // получаем список ролей, которые были добавлены
                     var addedRoles = roles.Except(userRoles);
-                    // получаем роли, которые были удалены
                     var removedRoles = userRoles.Except(roles);
-
                     await _userManager.AddToRolesAsync(user, addedRoles);
-
                     await _userManager.RemoveFromRolesAsync(user, removedRoles);
 
                     var result = await _userManager.UpdateAsync(user);
-
+                    
                     if (result.Succeeded)
                     {
+                        await _userManager.UpdateSecurityStampAsync(user);
                         return RedirectToAction("Index");
                     }
                     else
@@ -134,10 +117,18 @@ namespace Auction.Controllers
         [HttpPost]
         public async Task<ActionResult> Delete(string id)
         {
-            User user = await _userManager.FindByIdAsync(id);
+            User user = await db.Users.Include(u=>u.Lots).FirstAsync(u => u.Id == id);
             if (user != null)
             {
-                IdentityResult result = await _userManager.DeleteAsync(user);
+                db.Bids.RemoveRange(db.Bids.Where(b => b.User.Id == id || b.Lot.User.Id == id));
+                foreach (Lot lot in user.Lots)
+                {
+                    string path = "wwwroot/img/" + lot.Id + ".jpg";
+                    System.IO.File.Delete(path);
+                }
+                db.Lots.RemoveRange(db.Lots.Where(l => l.User.Id == id));
+                db.Users.Remove(user);
+                await db.SaveChangesAsync();
             }
             return RedirectToAction("Index");
         }
@@ -145,14 +136,27 @@ namespace Auction.Controllers
         [HttpGet]
         public async Task<IActionResult> Profile(string id)
         {
-            User user = db.Users.Include(u => u.Lots).Include(u => u.Bids).FirstOrDefault(u => u.Id == id);
+            User user = db.Users.Include(u => u.Lots).Include(u => u.Bids).ThenInclude(u=>u.Lot).FirstOrDefault(u => u.Id == id);
+            if (user == null)
+            {
+                return RedirectToAction("Index");
+            }
             User currentUser = await _userManager.GetUserAsync(HttpContext.User);
+            var roles = await _userManager.GetRolesAsync(user); 
             ProfileViewModel obj = new ProfileViewModel
             {
                 User = user,
-                IsMy = currentUser?.Id == id ? true : false
+                IsMy = (currentUser != null && currentUser.Id == id) ? true : false
             };
             return View(obj);
+        }
+
+        [AcceptVerbs("Get", "Post")]
+        public IActionResult CheckEmail(string email, string id)
+        {
+            if (db.Users.Any(u => u.Email == email && u.Id != id))
+                return Json(false);
+            return Json(true);
         }
     }
 }

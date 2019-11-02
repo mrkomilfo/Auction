@@ -1,14 +1,14 @@
 ﻿@model LotsListViewModel
 <div class="listing">
 @{
-    foreach (var lot in Model.AllLots)
+    foreach (var lot in Model.AllLots.OrderBy(l=>l.Ending))
     {
         <div class= "listing-item">
             <div class="listing-item-image">
                 <img src="@lot.Image" alt="@lot.Name" width="180" height="134"/> 
             </div>
             <div class="listing-item-main" >
-                <p class="listing-item-main-top"><a href="https://localhost:44391/Lots/LotDetail?id=@lot.Id">@lot.Name</a></p>
+                <p class="listing-item-main-top"><a class="object-link" href="https://localhost:44391/Lots/LotDetail?id=@lot.Id">@lot.Name</a></p>
                 <p class="listing-item-main-desc">@Model.ShortDesc(lot)</p>
                 <p class="listing-item-main-price">@lot.Price р.</p>
             </div>

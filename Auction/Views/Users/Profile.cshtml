@@ -1,7 +1,7 @@
 ﻿@model Auction.ViewModels.ProfileViewModel
 
-<div class="profile-body">
-    <div class="lot-bids-table-div">
+<div id="profile-body">
+    <div id="profile-left-table">
         @if (Model.IsMy)
         {
             <p class="lot-main-desc-title">Мои лоты:</p>
@@ -11,17 +11,17 @@
             <p class="lot-main-desc-title">Лоты пользователя:</p>
         }
         <table cellspacing="0" cellpadding="4">
-            <tr class="lot-bid-header">
+            <tr class="table-header">
                 <th>Название</th>
                 <th>Стоимость</th>
                 <th>Завершение</th>              
             </tr>
             @if (Model.User.Lots.Count > 0)
             {
-                foreach (var lot in Model.User.Lots)
+                foreach (var lot in Model.User.Lots.OrderBy(l => l.Ending))
                 {
-                    <tr class="lot-bid-data">
-                        <td><a href="https://localhost:44391/Lots/LotDetail?id=@lot.Id">@lot.Name</a></td>
+                    <tr class="table-row">
+                        <td><a class = "object-link" href="https://localhost:44391/Lots/LotDetail?id=@lot.Id">@lot.Name</a></td>
                         <td>@lot.Price</td>
                         <td>@lot.Ending</td>                    
                     </tr>
@@ -29,7 +29,7 @@
             }
             else
             {
-                <tr class="lot-bid-null">
+                <tr class="table-null">
                     <td colspan="3">Лотов пока нет</td>
                 </tr>
             }
@@ -37,34 +37,45 @@
         </table>
     </div>
     <div id="profile-desc">
-        <table border="0" cellspacing="10" height="358">
+        <table border="0" cellspacing="10">
             <tr>
-                <td class="lot-short-desc-title">Имя пользователя:</td>
-                <td class="lot-short-desc-data">@Model.User.UserName</td>
+                <td class="desc-table-title">Имя пользователя:</td>
+                <td class="desc-table-content">@Model.User.UserName</td>
             </tr>
             <tr>
-                <td class="lot-short-desc-title">Email:</td>
-                <td class="lot-short-desc-data">@Model.User.Email</td>
+                <td class="desc-table-title">Email:</td>
+                <td class="desc-table-content">@Model.User.Email</td>
             </tr>
             <tr>
-                <td class="lot-short-desc-title">Телефон:</td>
-                <td class="lot-short-desc-data">@(Model.User.PhoneNumber != null ? Model.User.PhoneNumber : "не указан")</td>
+                <td class="desc-table-title">Телефон:</td>
+                <td class="desc-table-content">@(Model.User.PhoneNumber != null ? Model.User.PhoneNumber : "не указан")</td>
             </tr>
             <tr>
-                <td class="lot-short-desc-title">Зарегистрирован:</td>
-                <td class="lot-short-desc-data">@Model.User.Registration</td>
+                <td class="desc-table-title">Зарегистрирован:</td>
+                <td class="desc-table-content">@Model.User.Registration</td>
             </tr>
             @if (Model.IsMy)
             {
-            <tr>
-                <td><button asp-action="Edit">Редактировать</button></td>
-                <td><button asp-action="ChangePassword">Изменить пароль</button></td>
-            </tr>
+                <tr>
+                    <td><a class="action-link-default" asp-controller="Account" asp-action="Edit" asp-route-id="@Model.User.Id">Редактировать</a></td>
+                    <td><a class="action-link-default" asp-controller="Account" asp-action="ChangePassword">Изменить пароль</a></td>                  
+                </tr>
             }
-        </table>
+            else if (User.IsInRole("admin"))
+            {
+                <tr>
+                    <td><a class="action-link-default" asp-controller="Users" asp-action="Roles" asp-route-id="@Model.User.Id">Роли</a></td>
+                    <td>
+                        <form asp-action="Delete" asp-route-id="@Model.User.Id" method="post">
+                            <input class="action-link-default button-danger" type="submit" value="Удалить" />
+                        </form>
+                    </td>
+                </tr>
+            }
+            </table>
     </div>
-    <div class="lot-bids-table-div">
-        @if (Model.IsMy)
+    <div id="profile-right-table">
+       @if (Model.IsMy)
         {
             <p class="lot-main-desc-title">Мои Ставки:</p>
         }
@@ -73,17 +84,17 @@
             <p class="lot-main-desc-title">Ставки пользователя:</p>
         }
         <table cellspacing="0" cellpadding="4">
-            <tr class="lot-bid-header">
+            <tr class="table-header">
                 <th>Лот</th>
                 <th>Размер ставки</th>             
                 <th>Время</th>
             </tr>
             @if (Model.User.Bids.Count > 0)
             {
-                foreach (var bid in Model.User.Bids)
+                foreach (var bid in Model.User.Bids.OrderByDescending(b => b.Time))
                 {
-                    <tr class="lot-bid-data">
-                        <td><a href="https://localhost:44391/Lots/LotDetail?id=@bid.Lot.Id">@bid.Lot.Name</a></td>                        
+                    <tr class="table-row">
+                        <td><a class = "object-link" href="https://localhost:44391/Lots/LotDetail?id=@bid.Lot.Id">@bid.Lot.Name</a></td>                        
                         <td>@bid.NewPrice</td>
                         <td>@bid.Time</td>
                     </tr>
@@ -91,7 +102,7 @@
             }
             else
             {
-                <tr class="lot-bid-null">
+                <tr class="table-null">
                     <td colspan="3">Ставок пока нет</td>
                 </tr>
             }

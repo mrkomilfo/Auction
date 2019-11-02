@@ -1,4 +1,9 @@
-﻿.nav-bar {
+﻿header{
+    position: sticky;
+    top: 0px;
+}
+
+.nav-bar {
     display:flex;
     width: 100%;
     justify-content: space-between;
@@ -10,9 +15,18 @@
     margin: 0px;
 }
 
+#exit-button{
+    margin: 0px 10px 0px 8px;
+}
+
 .nav-item {
     display: inline-block;
     padding-bottom: 0px;    
+}
+
+.nav-item-button {
+    display: inline-block;
+    padding-bottom: 0px;
 }
 
 .nav-item:hover {
@@ -29,9 +43,6 @@
 
 .nav-ref div{
     padding: 0px 10px;
-}
-
-header{
 }
 
 nav {

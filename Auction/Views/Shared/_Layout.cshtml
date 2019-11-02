@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <!--link href="~/css/bootstrap.min.css" rel="stylesheet" type="text/css"-->
+    <link href="~/css/LotsListStyles.css" rel="stylesheet" type="text/css">
+    <link href="~/css/HeaderStyles.css" rel="stylesheet" type="text/css">
+    <link href="~/css/LotDetailStyles.css" rel="stylesheet" type="text/css">
+    <link href="~/css/UserInfoStyles.css" rel="stylesheet" type="text/css">
+    <link href="~/css/FormStyles.css" rel="stylesheet" type="text/css">
+    <link href="~/css/ProfileStyles.css" rel="stylesheet" type="text/css">
+    <link href="~/css/UsersListStyles.css" rel="stylesheet" type="text/css">
+    <link href="~/css/GeneralStyles.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-bar">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a class="nav-ref" asp-controller="Lots" asp-action="ActualLots">
+                            <div>Текущие лоты   </div>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-ref" asp-controller="Lots" asp-action="EndedLots">
+                            <div>Завершенные лоты   </div>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-ref" asp-controller="Lots" asp-action="Create">
+                            <div>Выставить лот   </div>
+                        </a>
+                    </li>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-ref" asp-controller="Users" asp-action="Index">
+                                <div>Список пользователей   </div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-ref" asp-controller="Users" asp-action="Create">
+                                <div>Добавить пользователя   </div>
+                            </a>
+                        </li>
+                    }
+                </ul>
+                <ul class="nav-list nav-list-right">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-ref" asp-controller="Account" asp-action="Profile">
+                                <div>@User.Identity.Name</div>
+                            </a>
+                        </li>
+                        <li class="nav-item-button">
+                            <form method="post" asp-controller="Account" asp-action="LogOff">
+                                <input id="exit-button" class="action-link-default button-black" type="submit" value="Выход" />
+                            </form>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-ref" asp-controller="Account" asp-action="Login">
+                                <div>Вход   </div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-ref" asp-controller="Account" asp-action="Register">
+                                <div>Регистрация   </div>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main>
+        @RenderBody()
+    </main>
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <!--RenderSection("Scripts", required: false)-->
+</body>   
+</html>
+ 

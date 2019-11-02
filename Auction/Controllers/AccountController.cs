@@ -34,9 +34,9 @@ namespace Auction.Controllers
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    // установка куки
-                    await _signInManager.SignInAsync(user, false);
                     await _userManager.AddToRoleAsync(user, "user");
+                    // установка куки
+                    await _signInManager.SignInAsync(user, false);                   
                     return RedirectToAction("ActualLots", "Lots");
                 }
                 else
@@ -111,10 +111,94 @@ namespace Auction.Controllers
 
         [HttpGet]
         [Authorize]
-        public async Task<IActionResult> MyProfile()
+        public async Task<IActionResult> Profile()
         {
             User currentUser = await _userManager.GetUserAsync(HttpContext.User);
             return RedirectToAction("Profile", "Users", new { id = currentUser.Id });
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> Edit()
+        {
+            User user = await _userManager.GetUserAsync(HttpContext.User);
+            EditMyProfileViewModel model = new EditMyProfileViewModel
+            {
+                Id = user.Id,
+                Email = user.Email,
+                UserName = user.UserName,
+                PhoneNumber = user.PhoneNumber,
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditMyProfileViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = await _userManager.FindByIdAsync(model.Id);
+                if (user != null)
+                {
+                    user.Email = model.Email;
+                    user.UserName = model.UserName;
+                    user.PhoneNumber = model.PhoneNumber;                   
+
+                    var result = await _userManager.UpdateAsync(user);
+
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("Profile");
+                    }
+                    else
+                    {
+                        foreach (var error in result.Errors)
+                        {
+                            ModelState.AddModelError(string.Empty, error.Description);
+                        }
+                    }
+                }
+            }
+            return View(model);
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> ChangePassword()
+        {
+            User user = await _userManager.GetUserAsync(HttpContext.User);
+            ChangePasswordViewModel model = new ChangePasswordViewModel { Id = user.Id};
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = await _userManager.FindByIdAsync(model.Id);
+                if (user != null)
+                {
+                    IdentityResult result =
+                    await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("Profile");
+                    }
+                    else
+                    {
+                        foreach (var error in result.Errors)
+                        {
+                            ModelState.AddModelError(string.Empty, error.Description);
+                        }
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Пользователь не найден");
+                }
+            }
+            return View(model);
         }
     }
 }

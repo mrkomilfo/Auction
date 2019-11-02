@@ -1,31 +1,30 @@
 ﻿@model CreateLotViewModel
-@{
-    ViewBag.Title = "Создание лота";
-}
-<form asp-action="Create" asp-controller="Lots" enctype="multipart/form-data">
+
+<h2 class="form-header">Создание лота</h2>
+<form class="form-body" asp-action="Create" asp-controller="Lots" enctype="multipart/form-data">
     <div asp-validation-summary="All" class="text-danger"></div>
-    <div class="form-group">
-        <label asp-for="Name" class="control-label">Название</label>
+    <div class="form-input">
+        <label asp-for="Name">Название</label><br />
         <input type="text" asp-for="Name" class="form-control" />
     </div>
-    <div class="form-group">
-        <label asp-for="Year" class="control-label">Год выпуска</label>
+    <div class="form-input">
+        <label asp-for="Year" >Год выпуска</label><br />
         <input type="number" asp-for="Year" class="form-control" />
     </div>
-    <div class="form-group">
-        <label asp-for="EngineVolume" class="control-label">Объём двигателя</label>
+    <div class="form-input">
+        <label asp-for="EngineVolume">Объём двигателя</label><br />
         <input type="text" asp-for="EngineVolume" class="form-control" />
     </div>
-    <div class="form-group">
-        <label asp-for="Mileage" class="control-label">Пробег</label>
+    <div class="form-input">
+        <label asp-for="Mileage">Пробег</label><br />
         <input type="number" asp-for="Mileage" class="form-control" />
     </div>
-    <div class="form-group">
-        <label asp-for="Price" class="control-label">Начальная стоимость</label>
+    <div class="form-input">
+        <label asp-for="Price">Начальная стоимость</label><br />
         <input type="number" asp-for="Price" class="form-control" />
     </div>
-    <div>
-        <label asp-for="Transmission">Коробка</label>
+    <div  class="form-input">
+        <label asp-for="Transmission">Коробка</label><br />
         <select asp-for="Transmission">
             @foreach (var t in transmission)
             {
@@ -33,8 +32,8 @@
             }
         </select>
     </div>
-    <div>
-        <label asp-for="Fuel">Топливо</label>
+    <div  class="form-input">
+        <label asp-for="Fuel">Топливо</label><br />
         <select asp-for="Fuel">
             @foreach (var f in fuel)
             {
@@ -42,8 +41,8 @@
             }
         </select>
     </div>
-    <div>
-        <label asp-for="Body">Кузов</label>
+    <div  class="form-input">
+        <label asp-for="Body">Кузов</label><br />
         <select asp-for="Body">
             @foreach (var b in body)
             {
@@ -51,8 +50,8 @@
             }
         </select>
     </div>
-    <div>
-        <label asp-for="Drive">Привод</label>
+    <div  class="form-input">
+        <label asp-for="Drive">Привод</label><br />
         <select asp-for="Drive">
             @foreach (var d in drive)
             {
@@ -60,19 +59,19 @@
             }
         </select>
     </div>
-    <div>
-        <label asp-for="Desc" class="control-label">Описание</label>
-        <textarea asp-for="Desc"></textarea>
+    <div  class="form-input">
+        <label asp-for="Desc">Описание</label><br />
+        <textarea id="create-lot-desc" asp-for="Desc"></textarea>
     </div>
-    <div class="form-group">
-        <label asp-for="Duration" class="control-label">Продолжительность (от 1 до 30 дн)</label>
+    <div class="form-input">
+        <label asp-for="Duration">Продолжительность (от 1 до 30 дн)</label><br />
         <input type="number" asp-for="Duration" class="form-control" />
     </div>
-    <div class="form-group">
-        <label asp-for="Image" class="control-label">Изображение</label>
-        <input type="file" accept=".jpg,.png" asp-for="Image" class="form-control" />
+    <div class="form-input">
+        <label asp-for="Image">Изображение</label><br />
+        <input type="file" accept=".jpg,.png" asp-for="Image" />
     </div>
-    <div class="form-group">
-        <input type="submit" value="Добавить" class="btn btn-default" />
+    <div class="form-button">
+        <input class="action-link-default" type="submit" value="Добавить"/>
     </div>
 </form>

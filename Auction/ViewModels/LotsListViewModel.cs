@@ -1,10 +1,7 @@
 ﻿using Auction.Data.Models;
-using static Auction.Data.Dict;
-
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using static Auction.Data.Dict;
 
 namespace Auction.ViewModels
 {

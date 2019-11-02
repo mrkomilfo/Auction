@@ -1,0 +1,76 @@
+﻿h2 {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.table-header {
+    background-color: #A7D500;
+    font-size: 16px;
+    height: 22px;
+    text-align: left;
+}
+
+.table-row {
+    background-color: #ffff88;
+    height: 20px;
+    font-size: 16px;
+    text-align: left;
+}
+
+.table-null {
+    background-color: #ffff88;
+    text-align: center;
+    font-size: 16px;
+}
+
+.object-link {
+    color: #00bb00;
+    text-decoration: none;
+}
+
+.object-link:hover {
+    color: #008600;
+    text-decoration: underline;
+}
+
+.action-link-default {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    padding: 5px;
+    border: 1px solid #00bb00;
+    color: #00bb00;
+    background-color: rgba(0, 0, 0, 0.00);
+    text-align: center;
+    text-decoration: none;
+    border-radius: 6px;
+}
+
+.action-link-default:hover {
+    background-color: rgba(0, 0, 0, 0.00);
+    border: 2px solid #008600;
+    cursor: pointer;
+    color: #008600;
+}
+
+.action-link-default:active {
+    background-color: rgba(0, 0, 0, 0.2)
+}
+
+.button-danger {
+    border-color: #bb0000;
+    color: #bb0000;
+}
+
+.button-danger:hover {
+    border-color: #860000;
+    color: #860000;
+}
+
+.button-black {
+    border-color: #000000;
+    color: #000000;
+}
+
+.button-black:hover {
+    border-color: #000000;
+    color: #000000;
+}

@@ -56,16 +56,6 @@
     font-size: 19px;
 }
 
-.lot-short-desc-data a {
-    color: #00bb00;
-    text-decoration: none;
-}
-
-.lot-short-desc-data a:hover {
-    color: #008600;
-    text-decoration: underline;
-}
-
 .lot-main-desc {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     width: 100%;
@@ -95,22 +85,7 @@
     width: 100%;
 }
 
-.lot-bid-header {
-    background-color: #A7D500;
-    font-size: 16px;
-    height: 22px;
-    text-align: left;
-}
-
-.lot-bid-data {
-    background-color: #ffff88;
-    background-color: #A7D500;
-    height: 20px;
-    font-size: 16px;
-    text-align: left;
-}
-
-.lot-bid-null {
-    text-align:center;
-    font-size: 16px;
+#create-lot-desc {
+    height:80px;
+    width:300px;
 }

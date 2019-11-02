@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Auction.Data;
-using Auction.Data.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -11,7 +10,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
-using Auction.Data.Repository;
 using Auction.Data.DB;
 using Auction.Data.Models;
 
@@ -33,17 +31,18 @@ namespace Auction
         {
             string connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(connection));
-            //services.AddDbContext<AppDBContext>(options => options.UseSqlServer(connection));
-            //services.AddTransient<IUsers, UsersRepository>();
-            //services.AddTransient<ILots, LotsRepository>();            
-            //services.AddTransient<IBids, BidsRepository>();
-            services.AddIdentity<User, IdentityRole>(opts => {
-                opts.Password.RequiredLength = 5;   // минимальная длина
-                opts.Password.RequireNonAlphanumeric = false;   // требуются ли не алфавитно-цифровые символы
-                opts.Password.RequireLowercase = false; // требуются ли символы в нижнем регистре
-                opts.Password.RequireUppercase = false; // требуются ли символы в верхнем регистре
-                opts.Password.RequireDigit = false; // требуются ли цифры
+            services.AddIdentity<User, IdentityRole>(options => {
+                options.Password.RequiredLength = 5;   // минимальная длина
+                options.Password.RequireNonAlphanumeric = false;   // требуются ли не алфавитно-цифровые символы
+                options.Password.RequireLowercase = false; // требуются ли символы в нижнем регистре
+                options.Password.RequireUppercase = false; // требуются ли символы в верхнем регистре
+                options.Password.RequireDigit = false; // требуются ли цифры
             }).AddEntityFrameworkStores<ApplicationContext>();
+            services.Configure<SecurityStampValidatorOptions>(options =>
+            {
+                // enables immediate logout, after updating the user's stat.
+                options.ValidationInterval = TimeSpan.Zero;
+            });
             services.AddSingleton<IHostingEnvironment>(env);
             services.AddMvc();
         }

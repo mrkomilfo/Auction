@@ -1,8 +1,7 @@
 ﻿using Auction.Data.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace Auction.ViewModels
 {
@@ -10,6 +9,12 @@ namespace Auction.ViewModels
     {
         public Lot Lot { get; set; }
 
+        public int BidId { get; set; }
+
+        [Required]
+        [Remote(action: "CheckBid", controller: "Lots", AdditionalFields = nameof(BidId), ErrorMessage = "Ставка должна быть выше текущей")]
+        public uint BidPrice { get; set; }
+      
         public string TimeLeft(DateTime end)
         {
             TimeSpan left = end - DateTime.Now;

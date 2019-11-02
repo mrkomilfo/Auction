@@ -1,8 +1,4 @@
 ﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 
 namespace Auction.ViewModels
@@ -10,15 +6,17 @@ namespace Auction.ViewModels
     public class CreateLotViewModel
     {
         [Display(Name = "Название")]
-        [Required]
+        [MaxLength(31, ErrorMessage = "Слишком длинное название")]
+        [Required(ErrorMessage = "Не указано название")]
         public string Name { get; set; }
 
         [Display(Name = "Описание")]
-        [Required]
+        [MaxLength(1023, ErrorMessage = "Максимальная длина: 1023 символа")]
         public string Desc { get; set; }
 
         [Display(Name = "Год выпуска")]
-        [Required]
+        [Range(1900, 2019, ErrorMessage = "Неверно указан год")]
+        [Required(ErrorMessage = "Не указан год")]
         public ushort Year { get; set; }
 
         [Display(Name = "Коробка")]
@@ -26,7 +24,8 @@ namespace Auction.ViewModels
         public string Transmission { get; set; }
 
         [Display(Name = "Объём двигателя")]
-        [Required]
+        [Required(ErrorMessage = "Не указан объем")]
+        [RegularExpression(@"^(\d)+(,\d{1})?$", ErrorMessage = "Неверно указан объем")]
         public string EngineVolume { get; set; }
 
         [Display(Name = "Топливо")]
@@ -46,15 +45,17 @@ namespace Auction.ViewModels
         public uint Mileage { get; set; }
 
         [Display(Name = "Начальная стоимость")]
-        [Required]
+        [Required(ErrorMessage = "Не указана начальная стоимость")]
+        [Range(0, 4294967295)]
         public uint Price { get; set; }
 
         [Display(Name = "Длительность аукциона")]
-        [Required]
+        [Required(ErrorMessage = "Не указана длительность")]
+        [Range(1, 30, ErrorMessage = "Неверный диапазон")]
         public ushort Duration { get; set; }
 
         [Display(Name = "Изображение")]
-        [Required]
+        [Required(ErrorMessage = "Загрузите изображение")]
         public IFormFile Image { get; set; }
     }
 }

@@ -40,7 +40,7 @@
             <table id="lot-table-right" border="0" cellspacing="10" height="239">
                 <tr>
                     <td class="lot-short-desc-title">Владелец:</td>
-                    <td class="lot-short-desc-data"><a asp-controller="Users" asp-action="Profile" asp-route-id="@Model.Lot.User.Id">@Model.Lot.User.UserName</a></td>
+                    <td class="lot-short-desc-data"><a class="object-link" asp-controller="Users" asp-action="Profile" asp-route-id="@Model.Lot.User.Id">@Model.Lot.User.UserName</a></td>
                 </tr>
                 <tr>
                     <td class="lot-short-desc-title">Дата выставления:</td>
@@ -54,6 +54,16 @@
                     <td class="lot-short-desc-title">Стоимость:</td>
                     <td class="lot-short-desc-data">@Model.Lot.Price р.</td>
                 </tr>
+               @if (User.IsInRole("admin"))
+                {
+                <tr>
+                    <td colspan="2" class="lot-short-desc-title">
+                        <form asp-controller="Lots" asp-action="Delete" asp-route-id="@Model.Lot.Id" method="post">
+                            <input class="action-link-default button-danger" type="submit" value="Удалить" />
+                        </form>
+                    </td>
+                </tr>
+                }
             </table>
         </div>
     </div>   
@@ -64,20 +74,18 @@
     <div class="lot-bids">
         <div class="lot-bids-table-div">
             <p class="lot-main-desc-title">История ставок:</p>
-            <table cellspacing="0" cellpadding="4">
-                <tr class="lot-bid-header">
-                    <th>Номер ставки</th>
+            <table cellspacing="0" cellpadding="3">
+                <tr class="table-header">
                     <th>Пользователь</th>
                     <th>Новая цена</th>
                     <th>Время</th>
                 </tr>
                 @if (Model.Lot.Bids.Count > 0)
                 {
-                    foreach (var bid in Model.Lot.Bids)
+                    foreach (var bid in Model.Lot.Bids.OrderByDescending(b=>b.Time))
                     {
-                        <tr class="lot-bid-data">
-                            <td>@bid.Id</td>
-                            <td>@bid.User.UserName</td>
+                        <tr class="table-row">
+                            <td><a class="object-link" asp-controller="Users" asp-action="Profile" asp-route-id="@bid.User.Id">@bid.User.UserName</a></td>
                             <td>@bid.NewPrice</td>
                             <td>@bid.Time</td>
                         </tr>
@@ -85,16 +93,28 @@
                 }
                 else
                 {
-                    <tr class="lot-bid-null">
+                    <tr class="table-null">
                         <td colspan="4">Ставок пока нет</td>
                     </tr>
                 }
 
             </table>
         </div>
-        <div>
-            <form>
-            </form>
-        </div>
+       @if (Model.Lot.IsActual() && User.Identity.IsAuthenticated)
+        {
+            <div>
+                <form class="form-body" asp-action="MakeBid" asp-controller="Lots">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <input type="hidden" asp-for="BidId" value="@Model.Lot.Id">
+                    <div class="form-input">
+                        <label asp-for="BidPrice" class="control-label">Ваша ставка</label>
+                        <input type="number" asp-for="BidPrice" class="form-control" />
+                    </div>
+                    <div class="form-button">
+                        <input class="action-link-default" type="submit" value="Подтвердить" />
+                    </div>
+                </form>
+            </div>
+        }
     </div>
 </div>

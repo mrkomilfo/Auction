@@ -1,5 +1,4 @@
 ﻿using Auction.Data.Models;
-using System;
 
 namespace Auction.ViewModels
 {

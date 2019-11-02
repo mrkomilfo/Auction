@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace Auction.ViewModels
 {
@@ -6,14 +7,17 @@ namespace Auction.ViewModels
     {
         [Required(ErrorMessage = "Не указано имя пользователя")]
         [Display(Name = "Имя пользователя")]
+        [StringLength(20, MinimumLength = 3, ErrorMessage = "Длина строки должна быть от 3 до 20 символов")]
         public string UserName { get; set; }
 
         [Required(ErrorMessage = "Не указан электронный адрес")]
-        [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}", ErrorMessage = "Некорректный адрес")]
+        [EmailAddress(ErrorMessage = "Некорректный адрес")]
         [Display(Name = "Email")]
+        [Remote(action: "CheckEmail", controller: "Users", ErrorMessage = "Email уже используется")]
         public string Email { get; set; }
 
         [Display(Name = "Телефон")]
+        [Phone(ErrorMessage = "Телефон указан неверно")]
         public string PhoneNumber { get; set; }
 
         [Required(ErrorMessage = "Не указан пароль")]

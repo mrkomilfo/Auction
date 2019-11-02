@@ -1,0 +1,24 @@
+﻿@model EditMyProfileViewModel
+
+<h2 class="form-header">Редактирование пользователя</h2>
+<form class="form-body" asp-action="Edit" asp-controller="Account">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div>
+        <input type="hidden" asp-for="Id"/>
+    </div>
+    <div class="form-input">
+        <label asp-for="UserName">Имя пользователя</label><br />
+        <input type="text" asp-for="UserName"/>
+    </div>
+    <div class="form-input">
+        <label asp-for="Email">Email</label><br />
+        <input type="text" asp-for="Email" />
+    </div>
+    <div class="form-input">
+        <label asp-for="PhoneNumber">Телефон</label><br />
+        <input type="text" asp-for="PhoneNumber"/>
+    </div>
+    <div class="form-button">
+        <input class="action-link-default" type="submit" value="Сохранить" />
+    </div>
+</form>

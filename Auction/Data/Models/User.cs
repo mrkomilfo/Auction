@@ -12,6 +12,6 @@ namespace Auction.Data.Models
 
         public List<Lot> Lots { get; set; }
 
-        public List<Bid> Bids { get; set; }
+        public List<Bid> Bids { get; set; }      
     }
 }
