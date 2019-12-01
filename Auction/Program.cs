@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
@@ -8,7 +6,6 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity;
 using Auction.Data.Models;
-using Auction.Data.DB;
 
 namespace Auction
 {

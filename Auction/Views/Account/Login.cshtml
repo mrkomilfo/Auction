@@ -1,24 +1,25 @@
-﻿@model Auction.ViewModels.LoginViewModel
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model Auction.ViewModels.LoginViewModel
 
-<h2 class="form-header">Вход в приложение</h2>
-<form class="form-body" method="post" asp-controller="Account" asp-action="Login"
-      asp-route-returnUrl="@Model.ReturnUrl">
+<h2 class="form-header">@Localizer["Authorization"]</h2>
+<form class="form-body" method="post" asp-controller="Account" asp-action="Login" asp-route-returnUrl="@Model.ReturnUrl">
     <div asp-validation-summary="ModelOnly"></div>
     <div class="form-input">
-        <label asp-for="Email"></label><br />
+        <label asp-for="Email">Email</label><br />
         <input asp-for="Email" />
         <span asp-validation-for="Email"></span>
     </div>
     <div class="form-input">
-        <label asp-for="Password"></label><br />
+        <label asp-for="Password">@Localizer["Password"]</label><br />
         <input asp-for="Password" />
         <span asp-validation-for="Password"></span>
     </div>
     <div class="form-remember-checkbox">
         <input asp-for="RememberMe" /><br />
-        <label asp-for="RememberMe"></label>
+        <label asp-for="RememberMe">@Localizer["Remember"]</label>
     </div>
     <div class="form-button">
-        <input class="action-link-default" type="submit" value="Войти" />
+        <input class="action-link-default lower-button" type="submit" value="@Localizer["LogIn"]" />
     </div>
 </form>

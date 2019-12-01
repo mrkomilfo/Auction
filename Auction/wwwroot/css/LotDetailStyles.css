@@ -43,9 +43,17 @@
     margin-right: auto;
 }
 
+#lot-table-left tr{
+    height: 60px;
+}
+
 #lot-table-right {
     width: 50%;
     max-width: 420px;
+}
+
+#lot-table-right tr{
+    height: 60px;
 }
 
 .lot-short-desc-title {
@@ -88,4 +96,14 @@
 #create-lot-desc {
     height:80px;
     width:300px;
+}
+
+.make-bid-div {
+    margin-left: 16px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.make-bid-title {   
+    font-size: 22px;
+    margin: 10px 0px 10px 0px;
 }

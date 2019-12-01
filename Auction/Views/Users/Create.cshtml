@@ -1,25 +1,27 @@
 ﻿@model CreateUserViewModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 
-<h2 class="form-header">Добавление пользователя</h2>
+<h2 class="form-header">@Localizer["UserCreation"]</h2>
 <form class="form-body" asp-action="Create" asp-controller="Users">
     <div asp-validation-summary="All" class="text-danger"></div>
     <div class="form-input">
-        <label asp-for="UserName">Имя пользователя</label><br />
-        <input type="text" asp-for="UserName"/>
+        <label asp-for="UserName">@Localizer["UserName"]</label><br />
+        <input type="text" asp-for="UserName" />
     </div>
     <div class="form-input">
         <label asp-for="Email">Email</label><br />
-        <input type="text" asp-for="Email"/>
+        <input type="text" asp-for="Email" />
     </div>
     <div class="form-input">
-        <label asp-for="Password">Пароль</label><br />
-        <input type="text" asp-for="Password"/>
+        <label asp-for="Password">@Localizer["Password"]</label><br />
+        <input type="text" asp-for="Password" />
     </div>
     <div class="form-input">
-        <label asp-for="PhoneNumber">Телефон</label><br />
-        <input type="text" asp-for="PhoneNumber"/>
+        <label asp-for="PhoneNumber">@Localizer["PhoneNumber"]</label><br />
+        <input type="text" asp-for="PhoneNumber" />
     </div>
     <div class="form-button">
-        <input class="action-link-default" type="submit" value="Добавить"/>
+        <input class="action-link-default lower-button" type="submit" value=@Localizer["Add"] />
     </div>
 </form>

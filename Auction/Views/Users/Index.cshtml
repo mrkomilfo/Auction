@@ -1,15 +1,17 @@
 ﻿@model IEnumerable<User>
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 
-<h2 class="form-header">Список пользователей</h2>
+<h2 class="form-header">@Localizer["UsersList"]</h2>
 
 <table class="form-body" cellspacing="0">
-    <tr class="table-header"><th>Пользователь</th><th>Email</th><th>Дата регистрации</th></tr>
-   @foreach (var user in Model)
+    <tr class="table-header"><th>@Localizer["User"]</th><th>Email</th><th>@Localizer["RegistrationDate"]</th></tr>
+    @foreach (var user in Model)
     {
-    <tr class="table-row">
-        <td><a class="object-link" asp-action="Profile" asp-route-id="@user.Id">@user.UserName</a></td>
-        <td>@user.Email</td>
-        <td>@user.Registration</td>
-    </tr>
+        <tr class="table-row">
+            <td><obj-link class="object-link" obj=@user></obj-link></td>
+            <td>@user.Email</td>
+            <td>@user.Registration</td>
+        </tr>
     }
 </table>

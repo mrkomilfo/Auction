@@ -1,5 +1,8 @@
 ﻿<!DOCTYPE html>
 
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -8,7 +11,6 @@
     <link href="~/css/LotsListStyles.css" rel="stylesheet" type="text/css">
     <link href="~/css/HeaderStyles.css" rel="stylesheet" type="text/css">
     <link href="~/css/LotDetailStyles.css" rel="stylesheet" type="text/css">
-    <link href="~/css/UserInfoStyles.css" rel="stylesheet" type="text/css">
     <link href="~/css/FormStyles.css" rel="stylesheet" type="text/css">
     <link href="~/css/ProfileStyles.css" rel="stylesheet" type="text/css">
     <link href="~/css/UsersListStyles.css" rel="stylesheet" type="text/css">
@@ -21,34 +23,37 @@
                 <ul class="nav-list">
                     <li class="nav-item">
                         <a class="nav-ref" asp-controller="Lots" asp-action="ActualLots">
-                            <div>Текущие лоты   </div>
+                            <div>@Localizer["ActualLots"]</div>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-ref" asp-controller="Lots" asp-action="EndedLots">
-                            <div>Завершенные лоты   </div>
+                            <div>@Localizer["EndedLots"]</div>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-ref" asp-controller="Lots" asp-action="Create">
-                            <div>Выставить лот   </div>
+                            <div>@Localizer["CreateLot"]</div>
                         </a>
                     </li>
                     @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
                     {
                         <li class="nav-item">
                             <a class="nav-ref" asp-controller="Users" asp-action="Index">
-                                <div>Список пользователей   </div>
+                                <div>@Localizer["UsersList"]</div>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-ref" asp-controller="Users" asp-action="Create">
-                                <div>Добавить пользователя   </div>
+                                <div>@Localizer["CreateUser"]</div>
                             </a>
                         </li>
                     }
                 </ul>
                 <ul class="nav-list nav-list-right">
+                    <li id="languageSelector" class="nav-item">
+                        @await Html.PartialAsync("_LanguageSelectorPartial")
+                    </li>
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li class="nav-item">
@@ -58,7 +63,7 @@
                         </li>
                         <li class="nav-item-button">
                             <form method="post" asp-controller="Account" asp-action="LogOff">
-                                <input id="exit-button" class="action-link-default button-black" type="submit" value="Выход" />
+                                <input id="exit-button" class="action-link-default button-black" type="submit" value="@Localizer["LogOut"]" />
                             </form>
                         </li>
                     }
@@ -66,24 +71,34 @@
                     {
                         <li class="nav-item">
                             <a class="nav-ref" asp-controller="Account" asp-action="Login">
-                                <div>Вход   </div>
+                                <div>@Localizer["LogIn"]</div>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-ref" asp-controller="Account" asp-action="Register">
-                                <div>Регистрация   </div>
+                                <div>@Localizer["Register"]</div>
                             </a>
                         </li>
                     }
                 </ul>
             </div>
         </nav>
+        <partial name="_CookieConsentPartial" />
     </header>
     <main>
         @RenderBody()
     </main>
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <!--RenderSection("Scripts", required: false)-->
-</body>   
+</body>
 </html>
- 
+<script src="~/js/signalr.min.js"></script>
+<script>
+    const hubConnection = new signalR.HubConnectionBuilder()
+        .withUrl("/notifications")
+        .build();
+    hubConnection.on('Notify', function (message) {
+            alert(message);
+    });
+    hubConnection.start();
+</script>

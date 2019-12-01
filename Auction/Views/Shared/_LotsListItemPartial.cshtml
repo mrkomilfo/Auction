@@ -1,0 +1,17 @@
+﻿@model Lot
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+<div class="listing-item">
+    <div class="listing-item-image">
+        <img src="@Model.Image" alt="@Model.Name" width="180" height="134" />
+    </div>
+    <div class="listing-item-main">
+        <p class="listing-item-main-top"><obj-link class="object-link" obj=@Model></obj-link></p>
+        <p class="listing-item-main-desc">@await Component.InvokeAsync("ShortDesc", new { lot = Model, localizer = Localizer })</p>
+        <p class="listing-item-main-price">@Model.Price BYN</p>
+    </div>
+    <div class="listing-item-right">
+        <p>@await Component.InvokeAsync("TimeLeft", new { lot = Model, localizer = Localizer })</p>
+    </div>
+</div>

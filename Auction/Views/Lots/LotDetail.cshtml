@@ -1,91 +1,104 @@
 ﻿@model LotDetailViewModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 
 <div class="lot-body">
     <div class="lot-header">
         <div class="lot-header-name">@Model.Lot.Name</div>
-        <div class="lot-header-time">@Model.TimeLeft(Model.Lot.Ending)</div>
+        <div class="lot-header-time">@await Component.InvokeAsync("TimeLeft", new { lot = Model.Lot, localizer = Localizer })</div>
     </div>
-    <br/>
+    <br />
     <div class="lot-main">
         <div class="lot-image">
-            <img src="@Model.Lot.Image" alt="@Model.Lot.Name" width="480" height="358" />
+            <img src="@Model.Lot.Image" alt="@Model.Lot.Name" width="480" height="360" />
         </div>
         <div class="lot-short-desc">
-            <table id="lot-table-left" border="0" cellspacing="10" height="358">
+            <table id="lot-table-left" border="0">
                 <tr>
-                    <td class="lot-short-desc-title">Год выпуска:</td>
-                    <td class="lot-short-desc-data">@Model.Lot.Year г.</td>
+                    <td class="lot-short-desc-title">@Localizer["IssueYear"]:</td>
+                    <td class="lot-short-desc-data">@Model.Lot.Year</td>
                 </tr>
                 <tr>
-                    <td class="lot-short-desc-title">Коробка:</td>
+                    <td class="lot-short-desc-title">@Localizer["Transmission"]:</td>
                     <td class="lot-short-desc-data">@transmission[Model.Lot.Transmission]</td>
                 </tr>
                 <tr>
-                    <td class="lot-short-desc-title">Объём двигателя:</td>
-                    <td class="lot-short-desc-data">@Model.Lot.EngineVolume л.</td>
+                    <td class="lot-short-desc-title">@Localizer["EngineVolume"]:</td>
+                    <td class="lot-short-desc-data">@Model.Lot.EngineVolume @Localizer["liter"].</td>
                 </tr>
                 <tr>
-                    <td class="lot-short-desc-title">Топливо:</td>
+                    <td class="lot-short-desc-title">@Localizer["Fuel"]:</td>
                     <td class="lot-short-desc-data">@fuel[Model.Lot.Fuel]</td>
                 </tr>
                 <tr>
-                    <td class="lot-short-desc-title">Кузов:</td>
+                    <td class="lot-short-desc-title">@Localizer["Body"]:</td>
                     <td class="lot-short-desc-data">@body[Model.Lot.Body]</td>
                 </tr>
                 <tr>
-                    <td class="lot-short-desc-title">Пробег:</td>
-                    <td class="lot-short-desc-data">@Model.Lot.Milleage км.</td>
+                    <td class="lot-short-desc-title">@Localizer["Mileage"]:</td>
+                    <td class="lot-short-desc-data">@Model.Lot.Milleage @Localizer["km"].</td>
                 </tr>
             </table>
-            <table id="lot-table-right" border="0" cellspacing="10" height="239">
+            <table id="lot-table-right" border="0">
                 <tr>
-                    <td class="lot-short-desc-title">Владелец:</td>
-                    <td class="lot-short-desc-data"><a class="object-link" asp-controller="Users" asp-action="Profile" asp-route-id="@Model.Lot.User.Id">@Model.Lot.User.UserName</a></td>
+                    <td class="lot-short-desc-title">@Localizer["Owner"]:</td>
+                    <td class="lot-short-desc-data"><obj-link class="object-link" obj=@Model.Lot.User></obj-link></td>
                 </tr>
                 <tr>
-                    <td class="lot-short-desc-title">Дата выставления:</td>
+                    <td class="lot-short-desc-title">@Localizer["ExposingTime"]:</td>
                     <td class="lot-short-desc-data">@Model.Lot.Exposing</td>
                 </tr>
                 <tr>
-                    <td class="lot-short-desc-title">Дата завершения:</td>
+                    <td class="lot-short-desc-title">@Localizer["EndingTime"]:</td>
                     <td class="lot-short-desc-data">@Model.Lot.Ending</td>
                 </tr>
                 <tr>
-                    <td class="lot-short-desc-title">Стоимость:</td>
-                    <td class="lot-short-desc-data">@Model.Lot.Price р.</td>
+                    <td class="lot-short-desc-title">@Localizer["Price"]:</td>
+                    <td class="lot-short-desc-data">@Model.Lot.Price BYN</td>
                 </tr>
-               @if (User.IsInRole("admin"))
-                {
                 <tr>
-                    <td colspan="2" class="lot-short-desc-title">
-                        <form asp-controller="Lots" asp-action="Delete" asp-route-id="@Model.Lot.Id" method="post">
-                            <input class="action-link-default button-danger" type="submit" value="Удалить" />
-                        </form>
-                    </td>
+                    <td class="lot-short-desc-title">@(Model.Lot.IsActual() ? Localizer["Leader"].Value + ":" : Localizer["Winner"].Value + ":")</td>
+                    @if (Model.Lot.Bids.Any())
+                    {
+                        <td class="lot-short-desc-data"><obj-link class="object-link" obj=@Model.getLeader()></obj-link></td>
+                    }
+                    else
+                    {
+                        <td class="lot-short-desc-data">--</td>
+                    }
                 </tr>
+                @if (User.IsInRole("admin"))
+                {
+                    <tr>
+                        <td colspan="2" class="lot-short-desc-title">
+                            <form asp-controller="Lots" asp-action="Delete" asp-route-id="@Model.Lot.Id" method="post">
+                                <input class="action-link-default button-danger" type="submit" value=@Localizer["Delete"] />
+                            </form>
+                        </td>
+                    </tr>
                 }
             </table>
         </div>
-    </div>   
+    </div>
     <div class="lot-main-desc">
-        <p class="lot-main-desc-title">Описание лота:</p>
+        <p class="lot-main-desc-title">@Localizer["LotDescription"]:</p>
         <p class="lot-main-desc-data">@Model.Lot.Desc</p>
     </div>
     <div class="lot-bids">
         <div class="lot-bids-table-div">
-            <p class="lot-main-desc-title">История ставок:</p>
+            <p class="lot-main-desc-title">@Localizer["BidsHistory"]:</p>
             <table cellspacing="0" cellpadding="3">
                 <tr class="table-header">
-                    <th>Пользователь</th>
-                    <th>Новая цена</th>
-                    <th>Время</th>
+                    <th>@Localizer["User"]</th>
+                    <th>@Localizer["NewPrice"]</th>
+                    <th>@Localizer["Time"]</th>
                 </tr>
                 @if (Model.Lot.Bids.Count > 0)
                 {
-                    foreach (var bid in Model.Lot.Bids.OrderByDescending(b=>b.Time))
+                    foreach (var bid in Model.Lot.Bids.OrderByDescending(b => b.Time))
                     {
                         <tr class="table-row">
-                            <td><a class="object-link" asp-controller="Users" asp-action="Profile" asp-route-id="@bid.User.Id">@bid.User.UserName</a></td>
+                            <td><obj-link class="object-link" obj=@bid.User></obj-link></td>
                             <td>@bid.NewPrice</td>
                             <td>@bid.Time</td>
                         </tr>
@@ -94,24 +107,25 @@
                 else
                 {
                     <tr class="table-null">
-                        <td colspan="4">Ставок пока нет</td>
+                        <td colspan="4">@Localizer["NoBids"]</td>
                     </tr>
                 }
 
             </table>
         </div>
-       @if (Model.Lot.IsActual() && User.Identity.IsAuthenticated)
+        @if (Model.Lot.IsActual() && User.Identity.IsAuthenticated)
         {
-            <div>
-                <form class="form-body" asp-action="MakeBid" asp-controller="Lots">
+            <div class="make-bid-div">
+                <p class="make-bid-title">@Localizer["MakeBid"]:</p>
+                <form asp-action="MakeBid" asp-controller="Lots">
                     <div asp-validation-summary="All" class="text-danger"></div>
                     <input type="hidden" asp-for="BidId" value="@Model.Lot.Id">
                     <div class="form-input">
-                        <label asp-for="BidPrice" class="control-label">Ваша ставка</label>
+                        <label asp-for="BidPrice" class="control-label">@Localizer["YourBid"]</label>
                         <input type="number" asp-for="BidPrice" class="form-control" />
                     </div>
                     <div class="form-button">
-                        <input class="action-link-default" type="submit" value="Подтвердить" />
+                        <input class="action-link-default" type="submit" value=@Localizer["Confirm"] onclick="" />
                     </div>
                 </form>
             </div>

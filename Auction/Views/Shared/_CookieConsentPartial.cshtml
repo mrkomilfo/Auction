@@ -1,0 +1,31 @@
+﻿@using Microsoft.AspNetCore.Http.Features
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+@{
+    var consentFeature = Context.Features.Get<ITrackingConsentFeature>();
+    var showBanner = !consentFeature?.CanTrack ?? false;
+    var cookieString = consentFeature?.CreateConsentCookie();
+}
+
+@if (showBanner)
+{
+    <div id="cookieConsent" class="navbar" role="alert">
+        <p class="navbar-text">
+            @Localizer["ConsentText"]
+        </p>
+        <div class="navbar-right">
+            <!--<a asp-controller="Home" asp-action="Privacy" class="btn btn-info navbar-btn">Learn More</a>-->
+            <button type="button" class="action-link-default" data-cookie-string="@cookieString">@Localizer["Accept"]</button>
+        </div>
+    </div>
+    <script>
+        (function () {
+            document.querySelector("#cookieConsent button[data-cookie-string]").addEventListener("click", function (el) {
+                document.cookie = el.target.dataset.cookieString;
+                document.getElementById("cookieConsent").style.display = 'none';
+                //document.querySelector("#cookieConsent").classList.add("hidden");
+            }, false);
+        })();
+    </script>
+}

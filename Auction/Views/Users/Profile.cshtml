@@ -1,36 +1,38 @@
 ﻿@model Auction.ViewModels.ProfileViewModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 
 <div id="profile-body">
     <div id="profile-left-table">
         @if (Model.IsMy)
         {
-            <p class="lot-main-desc-title">Мои лоты:</p>
+            <p class="lot-main-desc-title">@Localizer["MyLots"]:</p>
         }
         else
         {
-            <p class="lot-main-desc-title">Лоты пользователя:</p>
+            <p class="lot-main-desc-title">@Localizer["UsersLots"]:</p>
         }
         <table cellspacing="0" cellpadding="4">
             <tr class="table-header">
-                <th>Название</th>
-                <th>Стоимость</th>
-                <th>Завершение</th>              
+                <th>@Localizer["Name"]</th>
+                <th>@Localizer["Price"]</th>
+                <th>@Localizer["Ending"]</th>
             </tr>
             @if (Model.User.Lots.Count > 0)
             {
                 foreach (var lot in Model.User.Lots.OrderBy(l => l.Ending))
                 {
                     <tr class="table-row">
-                        <td><a class = "object-link" href="https://localhost:44391/Lots/LotDetail?id=@lot.Id">@lot.Name</a></td>
+                        <td><obj-link class="object-link" obj=@lot></obj-link></td>
                         <td>@lot.Price</td>
-                        <td>@lot.Ending</td>                    
+                        <td>@lot.Ending</td>
                     </tr>
                 }
             }
             else
             {
                 <tr class="table-null">
-                    <td colspan="3">Лотов пока нет</td>
+                    <td colspan="3">@Localizer["NoLots"]</td>
                 </tr>
             }
 
@@ -39,7 +41,7 @@
     <div id="profile-desc">
         <table border="0" cellspacing="10">
             <tr>
-                <td class="desc-table-title">Имя пользователя:</td>
+                <td class="desc-table-title">@Localizer["UserName"]:</td>
                 <td class="desc-table-content">@Model.User.UserName</td>
             </tr>
             <tr>
@@ -47,54 +49,54 @@
                 <td class="desc-table-content">@Model.User.Email</td>
             </tr>
             <tr>
-                <td class="desc-table-title">Телефон:</td>
+                <td class="desc-table-title">@Localizer["PhoneNumber"]:</td>
                 <td class="desc-table-content">@(Model.User.PhoneNumber != null ? Model.User.PhoneNumber : "не указан")</td>
             </tr>
             <tr>
-                <td class="desc-table-title">Зарегистрирован:</td>
+                <td class="desc-table-title">@Localizer["Registered"]:</td>
                 <td class="desc-table-content">@Model.User.Registration</td>
             </tr>
             @if (Model.IsMy)
             {
                 <tr>
-                    <td><a class="action-link-default" asp-controller="Account" asp-action="Edit" asp-route-id="@Model.User.Id">Редактировать</a></td>
-                    <td><a class="action-link-default" asp-controller="Account" asp-action="ChangePassword">Изменить пароль</a></td>                  
+                    <td><a class="action-link-default" asp-controller="Account" asp-action="Edit" asp-route-id="@Model.User.Id">@Localizer["Edit"]</a></td>
+                    <td><a class="action-link-default" asp-controller="Account" asp-action="ChangePassword">@Localizer["ChangePassword"]</a></td>
                 </tr>
             }
             else if (User.IsInRole("admin"))
             {
                 <tr>
-                    <td><a class="action-link-default" asp-controller="Users" asp-action="Roles" asp-route-id="@Model.User.Id">Роли</a></td>
+                    <td><a class="action-link-default" asp-controller="Users" asp-action="Roles" asp-route-id="@Model.User.Id">@Localizer["Roles"]</a></td>
                     <td>
                         <form asp-action="Delete" asp-route-id="@Model.User.Id" method="post">
-                            <input class="action-link-default button-danger" type="submit" value="Удалить" />
+                            <input class="action-link-default button-danger" type="submit" value=@Localizer["Delete"] />
                         </form>
                     </td>
                 </tr>
             }
-            </table>
+        </table>
     </div>
     <div id="profile-right-table">
-       @if (Model.IsMy)
+        @if (Model.IsMy)
         {
-            <p class="lot-main-desc-title">Мои Ставки:</p>
+        <p class="lot-main-desc-title">@Localizer["MyBids"]:</p>
         }
         else
         {
-            <p class="lot-main-desc-title">Ставки пользователя:</p>
+        <p class="lot-main-desc-title">@Localizer["UsersBids"]:</p>
         }
         <table cellspacing="0" cellpadding="4">
             <tr class="table-header">
-                <th>Лот</th>
-                <th>Размер ставки</th>             
-                <th>Время</th>
+                <th>@Localizer["Lot"]</th>
+                <th>@Localizer["BidAmount"]</th>
+                <th>@Localizer["Time"]</th>
             </tr>
             @if (Model.User.Bids.Count > 0)
             {
                 foreach (var bid in Model.User.Bids.OrderByDescending(b => b.Time))
                 {
                     <tr class="table-row">
-                        <td><a class = "object-link" href="https://localhost:44391/Lots/LotDetail?id=@bid.Lot.Id">@bid.Lot.Name</a></td>                        
+                        <td><obj-link class="object-link" obj=@bid.Lot></obj-link></td>
                         <td>@bid.NewPrice</td>
                         <td>@bid.Time</td>
                     </tr>
@@ -103,10 +105,9 @@
             else
             {
                 <tr class="table-null">
-                    <td colspan="3">Ставок пока нет</td>
+                    <td colspan="3">@Localizer["NoBids"]</td>
                 </tr>
             }
-
         </table>
     </div>
 </div>

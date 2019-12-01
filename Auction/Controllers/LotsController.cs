@@ -10,7 +10,12 @@ using Microsoft.AspNetCore.Identity;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Authorization;
+using Auction.Data;
 using static Auction.Data.Dict;
+using System.Collections.Generic;
+using Microsoft.Extensions.Localization;
+using Auction.Hubs;
+using Microsoft.AspNetCore.SignalR;
 
 namespace Auction.Controllers
 {   
@@ -19,30 +24,32 @@ namespace Auction.Controllers
         private ApplicationContext db;
         private UserManager<User> _userManager;
         private IHostingEnvironment _appEnvironment;
+        private IStringLocalizer<LotsController> _localizer;
+        private Dict _dict;
+        private IHubContext<NotificationHub> _hubContext;
 
-        public LotsController(ApplicationContext context, UserManager<User> userManager, IHostingEnvironment appEnvironment)
+        public LotsController(ApplicationContext context, UserManager<User> userManager, IHostingEnvironment appEnvironment, Dict dict, IStringLocalizer<LotsController> localizer, IHubContext<NotificationHub> hubContext)
         {
             db = context;
             _userManager = userManager;
             _appEnvironment = appEnvironment;
+            _localizer = localizer;
+            _dict = dict;
+            _hubContext = hubContext;
         }
 
         [HttpGet]
         public ViewResult ActualLots()
         {
-            LotsListViewModel obj = new LotsListViewModel();
-            //obj.allLots = allLots.ActualLots;
-            obj.AllLots = db.Lots.Include(l => l.User).Where(l => l.IsActual()).OrderByDescending(l => l);     
-            return View("LotsList", obj);
+            IEnumerable<Lot> lots = db.Lots.Include(l => l.User).Where(l => l.IsActual()).OrderByDescending(l => l.Exposing);     
+            return View("LotsList", lots);
         }
 
         [HttpGet]
         public ViewResult EndedLots()
         {
-            LotsListViewModel obj = new LotsListViewModel();
-            //obj.allLots = allLots.EndedLots;
-            obj.AllLots = db.Lots.Include(l => l.User).Where(l => !l.IsActual()).OrderByDescending(l => l);
-            return View("LotsList", obj);
+            IEnumerable<Lot> lots = db.Lots.Include(l => l.User).Where(l => !l.IsActual()).OrderByDescending(l => l.Ending);
+            return View("LotsList", lots);
         }
 
         [HttpGet]
@@ -82,10 +89,10 @@ namespace Auction.Controllers
                     EngineVolume = double.Parse(model.EngineVolume),
                     Milleage = model.Mileage,
                     Price = model.Price,
-                    Transmission = (ushort)Array.IndexOf(transmission, model.Transmission),
-                    Fuel = (ushort)Array.IndexOf(fuel, model.Fuel),
-                    Body = (ushort)Array.IndexOf(body, model.Body),
-                    Drive = (ushort)Array.IndexOf(drive, model.Drive),
+                    Transmission = (ushort)transmission.IndexOf(model.Transmission),
+                    Fuel = (ushort)fuel.IndexOf(model.Fuel),
+                    Body = (ushort)body.IndexOf(model.Body),
+                    Drive = (ushort)drive.IndexOf(model.Drive),
                     Desc = model.Desc,
                     Exposing = DateTime.Now,
                     Ending = DateTime.Now.AddDays(model.Duration),
@@ -115,7 +122,7 @@ namespace Auction.Controllers
         [HttpPost]
         public async Task<ActionResult> MakeBid(LotDetailViewModel model)
         {
-            Lot lot = db.Lots.Include(l => l.User).Include(l => l.Bids).FirstOrDefault(l => l.Id == model.BidId);
+            Lot lot = db.Lots.Include(l => l.User).Include(l => l.Bids).ThenInclude(b=>b.User).FirstOrDefault(l => l.Id == model.BidId);
             if (ModelState.IsValid && lot.IsActual())
             {
                 User user = await _userManager.GetUserAsync(HttpContext.User);
@@ -131,6 +138,13 @@ namespace Auction.Controllers
                 lot.Price = model.BidPrice;
                 db.Lots.Update(lot);          
                 db.SaveChanges();
+
+                if (lot.Bids.Count() >= 2)
+                {
+                    User reciever = lot.Bids.ElementAt(lot.Bids.Count() - 2).User;
+                    await _hubContext.Clients.User(reciever.Id).SendAsync("Notify", user.UserName + " has broken your bid on the " + lot.Name);
+                }
+                
                 return RedirectToAction("LotDetail", new {id = lot.Id});
             }
             return RedirectToAction("LotDetail", new { id = lot.Id });

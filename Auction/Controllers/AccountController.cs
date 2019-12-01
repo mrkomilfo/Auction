@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using System.Linq;
 using System;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 
 namespace Auction.Controllers
 {

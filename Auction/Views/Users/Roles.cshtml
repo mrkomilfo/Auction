@@ -1,10 +1,22 @@
 ﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc.Localization
 @model EditRolesViewModel
+@inject IViewLocalizer Localizer
 
-<h2 class="form-header">Управление ролями</h2>
+<h2 class="form-header">@Localizer["RolesManagement"]</h2>
 <form class="form-body" asp-action="Roles" asp-controller="Users">
     <div asp-validation-summary="All" class="text-danger"></div>
     <input type="hidden" asp-for="Id" />
+    <div>
+        @foreach (IdentityRole role in Model.AllRoles)
+        {
+            <input type="checkbox" name="roles" value="@role.Name"
+                   @(Model.UserRoles.Contains(role.Name) ? "checked=\"checked\"" : "") />@role.Name <br />
+            }
+    </div>
+    <div class="form-button">
+        <input class="action-link-default lower-button" type="submit" value=@Localizer["Save"] />
+    </div>
     <!--<div class="form-input">
         <label asp-for="UserName">Имя пользователя</label><br />
         <input type="text" asp-for="UserName" class="form-control" />
@@ -17,14 +29,4 @@
         <label asp-for="PhoneNumber">Телефон</label><br />
         <input type="text" asp-for="PhoneNumber"/>
     </div>-->
-    <div>
-       @foreach (IdentityRole role in Model.AllRoles)
-        {
-            <input type="checkbox" name="roles" value="@role.Name"
-                    @(Model.UserRoles.Contains(role.Name) ? "checked=\"checked\"" : "") />@role.Name <br />
-        }
-    </div>
-    <div class="form-button">
-        <input class="action-link-default" type="submit" value="Сохранить"/>
-    </div>
 </form>

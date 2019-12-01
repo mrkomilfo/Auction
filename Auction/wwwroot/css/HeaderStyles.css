@@ -33,6 +33,10 @@
     background: linear-gradient(to top, #ffffffff 0%, #A7D50000 50%);
 }
 
+#languageSelector:hover {
+    background: inherit !important;
+}
+
 .nav-ref {
     text-decoration: none;
     line-height: 42px;
@@ -47,10 +51,32 @@
 
 nav {
     background-color: #A7D500;
-    margin-bottom: 4px
+}
+
+#cookieConsent {
+    background-color: #ffff88;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    overflow: auto;
+
+}
+
+.navbar-right {
+    margin: 8px;
+}
+
+.navbar-text {
+    margin: 8px;
+    font-weight: 600;
+    font-family: Calibri;
 }
 
 body {
     margin: 0px;
+}
+
+main {
+    margin-top: 4px;
 }
 

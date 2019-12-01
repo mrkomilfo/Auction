@@ -29,12 +29,17 @@ using Microsoft.AspNetCore.Identity;
 #line default
 #line hidden
 #line 4 "D:\ASP\Auction\Auction\Views\_ViewImports.cshtml"
+using Auction.TagHelpers;
+
+#line default
+#line hidden
+#line 5 "D:\ASP\Auction\Auction\Views\_ViewImports.cshtml"
 using static Auction.Data.Dict;
 
 #line default
 #line hidden
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"7091c65830b0329e613be026ede8a57552863778", @"/Views/_ViewStart.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"f75f34ecbbfe182d66f861010abebaa04ae56b57", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"48e1f3edcad600800ae6ddf36380b52643555de7", @"/Views/_ViewImports.cshtml")]
     public class Views__ViewStart : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998

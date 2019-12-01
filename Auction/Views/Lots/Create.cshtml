@@ -1,30 +1,32 @@
 ﻿@model CreateLotViewModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 
-<h2 class="form-header">Создание лота</h2>
+<h2 class="form-header">@Localizer["LotCreation"]</h2>
 <form class="form-body" asp-action="Create" asp-controller="Lots" enctype="multipart/form-data">
     <div asp-validation-summary="All" class="text-danger"></div>
     <div class="form-input">
-        <label asp-for="Name">Название</label><br />
+        <label asp-for="Name">@Localizer["Name"]</label><br />
         <input type="text" asp-for="Name" class="form-control" />
     </div>
     <div class="form-input">
-        <label asp-for="Year" >Год выпуска</label><br />
+        <label asp-for="Year">@Localizer["IssueYear"]</label><br />
         <input type="number" asp-for="Year" class="form-control" />
     </div>
     <div class="form-input">
-        <label asp-for="EngineVolume">Объём двигателя</label><br />
+        <label asp-for="EngineVolume">@Localizer["EngineVolume"]</label><br />
         <input type="text" asp-for="EngineVolume" class="form-control" />
     </div>
     <div class="form-input">
-        <label asp-for="Mileage">Пробег</label><br />
+        <label asp-for="Mileage">@Localizer["Milleage"]</label><br />
         <input type="number" asp-for="Mileage" class="form-control" />
     </div>
     <div class="form-input">
-        <label asp-for="Price">Начальная стоимость</label><br />
+        <label asp-for="Price">@Localizer["StartPrice"]</label><br />
         <input type="number" asp-for="Price" class="form-control" />
     </div>
-    <div  class="form-input">
-        <label asp-for="Transmission">Коробка</label><br />
+    <div class="form-input">
+        <label asp-for="Transmission">@Localizer["Transmission"]</label><br />
         <select asp-for="Transmission">
             @foreach (var t in transmission)
             {
@@ -32,8 +34,8 @@
             }
         </select>
     </div>
-    <div  class="form-input">
-        <label asp-for="Fuel">Топливо</label><br />
+    <div class="form-input">
+        <label asp-for="Fuel">@Localizer["Fuel"]</label><br />
         <select asp-for="Fuel">
             @foreach (var f in fuel)
             {
@@ -41,8 +43,8 @@
             }
         </select>
     </div>
-    <div  class="form-input">
-        <label asp-for="Body">Кузов</label><br />
+    <div class="form-input">
+        <label asp-for="Body">@Localizer["Body"]</label><br />
         <select asp-for="Body">
             @foreach (var b in body)
             {
@@ -50,8 +52,8 @@
             }
         </select>
     </div>
-    <div  class="form-input">
-        <label asp-for="Drive">Привод</label><br />
+    <div class="form-input">
+        <label asp-for="Drive">@Localizer["Drive"]</label><br />
         <select asp-for="Drive">
             @foreach (var d in drive)
             {
@@ -59,19 +61,19 @@
             }
         </select>
     </div>
-    <div  class="form-input">
-        <label asp-for="Desc">Описание</label><br />
+    <div class="form-input">
+        <label asp-for="Desc">@Localizer["Description"]</label><br />
         <textarea id="create-lot-desc" asp-for="Desc"></textarea>
     </div>
     <div class="form-input">
-        <label asp-for="Duration">Продолжительность (от 1 до 30 дн)</label><br />
+        <label asp-for="Duration">@Localizer["Duration"] (1 - 30 @Localizer["days"])</label><br />
         <input type="number" asp-for="Duration" class="form-control" />
     </div>
     <div class="form-input">
-        <label asp-for="Image">Изображение</label><br />
-        <input type="file" accept=".jpg,.png" asp-for="Image" />
+        <label asp-for="Image">@Localizer["Image"]</label><br />
+        <input type="file" accept=".jpg,.png" asp-for="Image"/>
     </div>
     <div class="form-button">
-        <input class="action-link-default" type="submit" value="Добавить"/>
+        <input class="action-link-default lower-button" type="submit" value="@Localizer["Add"]" />
     </div>
 </form>
