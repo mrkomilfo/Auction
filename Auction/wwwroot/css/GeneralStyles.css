@@ -2,6 +2,10 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
+button:focus {
+    outline: 0;
+}
+
 .table-header {
     background-color: #A7D500;
     font-size: 16px;
@@ -44,9 +48,12 @@
     border-radius: 6px;
 }
 
+.action-link-default:focus {
+    outline:0;
+}
+
 .action-link-default:hover {
-    background-color: rgba(0, 0, 0, 0.00);
-    border: 2px solid #008600;
+    background-color: rgba(0, 0, 0, 0.1);
     cursor: pointer;
     color: #008600;
 }
@@ -77,4 +84,34 @@
 
 .lower-button {
     margin-bottom: 16px;
+}
+
+.tab {
+    background-color: #87B500;
+    border-radius: 8px 8px 0px 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:16px;
+    border: none;
+}
+
+.tab:hover {
+    background-color: #77A500;
+    cursor: pointer;
+}
+
+.tab:active {
+    background-color: #679500;
+}
+
+.tab-active {
+    background-color: #A7D500;
+}
+
+.tab-active:hover {
+    background-color: #A7D500;
+    cursor: pointer;
+}
+
+.tab-active:active {
+    background-color: #A7D500;
 }

@@ -14,6 +14,7 @@ namespace Auction.ViewModels
         [Remote(action: "CheckEmail", controller: "Users", ErrorMessage = "Email уже используется")]
         public string Email { get; set; }
 
+        [Required(ErrorMessage = "Не указан телефон")]
         [Phone(ErrorMessage = "Телефон указан неверно")]
         public string PhoneNumber { get; set; }
 

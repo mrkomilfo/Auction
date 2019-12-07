@@ -38,7 +38,7 @@ namespace Auction.Controllers
                     await _userManager.AddToRoleAsync(user, "user");
                     // установка куки
                     await _signInManager.SignInAsync(user, false);                   
-                    return RedirectToAction("ActualLots", "Lots");
+                    return RedirectToAction("Actual", "Lots");
                 }
                 else
                 {
@@ -90,7 +90,7 @@ namespace Auction.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("ActualLots", "Lots");
+                        return RedirectToAction("Actual", "Lots");
                     }
                 }
                 else

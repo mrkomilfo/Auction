@@ -1,11 +1,37 @@
-﻿@model IEnumerable<Lot>
-<div class="listing">
-@{
-    foreach (var lot in Model)
-    {
-        @await Html.PartialAsync("_LotsListItemPartial", lot)
-    }
-}
+﻿<div id="scrolList">
+    @await Html.PartialAsync("_LotsListPartial")
 </div>
 
-  
+<script>
+$(function () {
+    var page = 0;
+    var _inCallback = false;
+    function loadItems() {
+        if (page > -1 && !_inCallback) {
+            _inCallback = true;
+            page++;
+
+            $.ajax({
+                type: 'GET',
+                url: '/Lots/Actual/' + page,
+                success: function (data) {
+                    if (data != '') {
+                        $("#scrolList").append(data);
+                    }
+                    else {
+                        page = -1;
+                    }
+                    _inCallback = false;
+                }
+            });
+        }
+    }
+    // обработка события скроллинга
+    $(window).scroll(function () {
+        if ($(window).scrollTop() + $(window).height() > $(document).height() - 16) {
+            loadItems();
+        }
+    });
+})
+</script>
+

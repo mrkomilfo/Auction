@@ -4,7 +4,9 @@
 
 <div class="listing-item">
     <div class="listing-item-image">
-        <img src="@Model.Image" alt="@Model.Name" width="180" height="134" />
+        <a asp-controller="Lots" asp-action="Detail" asp-route-id=@Model.Id>
+            <img src="@Model.Image" alt="@Model.Name" width="180" height="134" />
+        </a>
     </div>
     <div class="listing-item-main">
         <p class="listing-item-main-top"><obj-link class="object-link" obj=@Model></obj-link></p>

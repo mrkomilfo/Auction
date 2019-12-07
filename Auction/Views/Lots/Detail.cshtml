@@ -10,7 +10,9 @@
     <br />
     <div class="lot-main">
         <div class="lot-image">
-            <img src="@Model.Lot.Image" alt="@Model.Lot.Name" width="480" height="360" />
+            <a href="~/img/@(Model.Lot.Id).jpg">
+                <img src="@Model.Lot.Image" alt="@Model.Lot.Name" width="480" height="360" />
+            </a>
         </div>
         <div class="lot-short-desc">
             <table id="lot-table-left" border="0">
@@ -37,6 +39,10 @@
                 <tr>
                     <td class="lot-short-desc-title">@Localizer["Mileage"]:</td>
                     <td class="lot-short-desc-data">@Model.Lot.Milleage @Localizer["km"].</td>
+                </tr>
+                <tr>
+                    <td class="lot-short-desc-title">@Localizer["Drive"]:</td>
+                    <td class="lot-short-desc-data">@drive[Model.Lot.Drive]</td>
                 </tr>
             </table>
             <table id="lot-table-right" border="0">

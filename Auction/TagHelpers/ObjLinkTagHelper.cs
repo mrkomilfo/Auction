@@ -16,7 +16,7 @@ namespace Auction.TagHelpers
             if (type == typeof(Lot))
             {
                 Lot lot = (Lot)Obj;
-                output.Attributes.SetAttribute("href", "/Lots/LotDetail?id=" + lot.Id);
+                output.Attributes.SetAttribute("href", "/Lot/" + lot.Id);
                 if ((await output.GetChildContentAsync()).GetContent().Length == 0)
                 {
                     output.Content.SetContent(lot.Name);
@@ -25,7 +25,7 @@ namespace Auction.TagHelpers
             else if (type == typeof(User))
             { 
                 User user = (User)Obj;
-                output.Attributes.SetAttribute("href", "/Users/Profile?id=" + user.Id);
+                output.Attributes.SetAttribute("href", "/Users/Profile/" + user.Id);
                 if ((await output.GetChildContentAsync()).GetContent().Length == 0)
                 {
                     output.Content.SetContent(user.UserName);

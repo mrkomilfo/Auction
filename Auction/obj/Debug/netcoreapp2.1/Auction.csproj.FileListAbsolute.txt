@@ -27,9 +27,6 @@ D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Auction.Resources.Views.Shared._C
 D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Auction.Resources.Views.Shared._LotsListItemPartial.be.resources
 D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Auction.Resources.Views.Shared._LotsListItemPartial.en.resources
 D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Auction.Resources.Views.Shared._LotsListItemPartial.ru.resources
-D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Auction.Resources.Views.Lots.LotDetail.be.resources
-D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Auction.Resources.Views.Lots.LotDetail.en.resources
-D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Auction.Resources.Views.Lots.LotDetail.ru.resources
 D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Auction.Resources.Views.Lots.Create.ru.resources
 D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Auction.Resources.Views.Lots.Create.be.resources
 D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Auction.Resources.Views.Lots.Create.en.resources
@@ -75,7 +72,6 @@ D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Razor\Views\Account\Edit.g.cshtml
 D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Razor\Views\Account\Login.g.cshtml.cs
 D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Razor\Views\Account\Register.g.cshtml.cs
 D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Razor\Views\Lots\Create.g.cshtml.cs
-D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Razor\Views\Lots\LotDetail.g.cshtml.cs
 D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Razor\Views\Lots\LotsList.g.cshtml.cs
 D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_CookieConsentPartial.g.cshtml.cs
 D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_LanguageSelectorPartial.g.cshtml.cs
@@ -93,3 +89,8 @@ D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Auction.RazorTargetAssemblyInfo.c
 D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Auction.Views.pdb
 D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Auction.csproj.CopyComplete
 D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Auction.csprojAssemblyReference.cache
+D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Razor\Views\Lots\Detail.g.cshtml.cs
+D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Auction.Resources.Views.Lots.Detail.be.resources
+D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Auction.Resources.Views.Lots.Detail.en.resources
+D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Auction.Resources.Views.Lots.Detail.ru.resources
+D:\ASP\Auction\Auction\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_LotsListPartial.g.cshtml.cs

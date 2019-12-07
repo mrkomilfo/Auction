@@ -1,43 +1,46 @@
 ﻿@model Auction.ViewModels.ProfileViewModel
 @using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
+@section Scripts
+{
+    <script type="text/javascript">
+        var bidsButton = document.getElementById('bidsButton');
+        var expodedLotsButton = document.getElementById('expodedLotsButton');
+        var wonLotsButton = document.getElementById('wonLotsButton');
 
+        var bidsTable = document.getElementById('bidsTable');
+        var expodedLotsTable = document.getElementById('expodedLotsTable');
+        var wonLotsTable = document.getElementById('wonLotsTable');
+
+        function bidsButtonClicked() {
+            bidsTable.style.display = 'inline-table';
+            expodedLotsTable.style.display = 'none';
+            wonLotsTable.style.display = 'none';
+            bidsButton.className = 'tab tab-active';
+            expodedLotsButton.className = 'tab';
+            wonLotsButton.className = 'tab';
+        }
+
+        function expodedLotsButtonClicked() {
+            bidsTable.style.display = 'none';
+            expodedLotsTable.style.display = 'inline-table';
+            wonLotsTable.style.display = 'none';
+            bidsButton.className = 'tab';
+            expodedLotsButton.className = 'tab tab-active';
+            wonLotsButton.className = 'tab';
+        }
+
+        function wonLotsButtonClicked() {
+            bidsTable.style.display = 'none';
+            expodedLotsTable.style.display = 'none';
+            wonLotsTable.style.display = 'inline-table';
+            bidsButton.className = 'tab';
+            expodedLotsButton.className = 'tab';
+            wonLotsButton.className = 'tab tab-active';
+        }
+    </script>
+}
 <div id="profile-body">
-    <div id="profile-left-table">
-        @if (Model.IsMy)
-        {
-            <p class="lot-main-desc-title">@Localizer["MyLots"]:</p>
-        }
-        else
-        {
-            <p class="lot-main-desc-title">@Localizer["UsersLots"]:</p>
-        }
-        <table cellspacing="0" cellpadding="4">
-            <tr class="table-header">
-                <th>@Localizer["Name"]</th>
-                <th>@Localizer["Price"]</th>
-                <th>@Localizer["Ending"]</th>
-            </tr>
-            @if (Model.User.Lots.Count > 0)
-            {
-                foreach (var lot in Model.User.Lots.OrderBy(l => l.Ending))
-                {
-                    <tr class="table-row">
-                        <td><obj-link class="object-link" obj=@lot></obj-link></td>
-                        <td>@lot.Price</td>
-                        <td>@lot.Ending</td>
-                    </tr>
-                }
-            }
-            else
-            {
-                <tr class="table-null">
-                    <td colspan="3">@Localizer["NoLots"]</td>
-                </tr>
-            }
-
-        </table>
-    </div>
     <div id="profile-desc">
         <table border="0" cellspacing="10">
             <tr>
@@ -56,6 +59,7 @@
                 <td class="desc-table-title">@Localizer["Registered"]:</td>
                 <td class="desc-table-content">@Model.User.Registration</td>
             </tr>
+
             @if (Model.IsMy)
             {
                 <tr>
@@ -76,38 +80,92 @@
             }
         </table>
     </div>
-    <div id="profile-right-table">
-        @if (Model.IsMy)
-        {
-        <p class="lot-main-desc-title">@Localizer["MyBids"]:</p>
-        }
-        else
-        {
-        <p class="lot-main-desc-title">@Localizer["UsersBids"]:</p>
-        }
-        <table cellspacing="0" cellpadding="4">
-            <tr class="table-header">
-                <th>@Localizer["Lot"]</th>
-                <th>@Localizer["BidAmount"]</th>
-                <th>@Localizer["Time"]</th>
-            </tr>
-            @if (Model.User.Bids.Count > 0)
-            {
-                foreach (var bid in Model.User.Bids.OrderByDescending(b => b.Time))
+    <div class="profile-tabs-panel">
+        <div class="profile-tabs">
+            <button id="bidsButton" class="tab tab-active" onclick="bidsButtonClicked();">@Localizer["Bids"]</button>
+            <button id="expodedLotsButton" class="tab" onclick="expodedLotsButtonClicked();">@Localizer["ExpodedLots"]</button>
+            <button id="wonLotsButton" class="tab" onclick="wonLotsButtonClicked();">@Localizer["WonLots"]</button>
+        </div>
+        <div class="profile-table-space">
+            <table cellspacing="0" cellpadding="4" id="bidsTable">
+                <tr class="table-header">
+                    <th>@Localizer["Lot"]</th>
+                    <th>@Localizer["BidAmount"]</th>
+                    <th>@Localizer["Time"]</th>
+                </tr>
+                @if (Model.User.Bids.Count > 0)
                 {
-                    <tr class="table-row">
-                        <td><obj-link class="object-link" obj=@bid.Lot></obj-link></td>
-                        <td>@bid.NewPrice</td>
-                        <td>@bid.Time</td>
+                    foreach (var bid in Model.User.Bids.OrderByDescending(b => b.Time))
+                    {
+                        <tr class="table-row">
+                            <td><obj-link class="object-link" obj=@bid.Lot></obj-link></td>
+                            <td>@bid.NewPrice</td>
+                            <td>@bid.Time</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr class="table-null">
+                        <td colspan="3">@Localizer["NoBids"]</td>
                     </tr>
                 }
-            }
-            else
-            {
-                <tr class="table-null">
-                    <td colspan="3">@Localizer["NoBids"]</td>
+            </table>
+            <table cellspacing="0" cellpadding="4" id="expodedLotsTable" style="display:none">
+                <tr class="table-header">
+                    <th>@Localizer["Name"]</th>
+                    <th>@Localizer["Price"]</th>
+                    <th>@Localizer["Ending"]</th>
                 </tr>
-            }
-        </table>
+                @if (Model.User.Lots.Count > 0)
+                {
+                    foreach (var lot in Model.User.Lots.OrderByDescending(l => l.Ending))
+                    {
+                        <tr class="table-row">
+                            <td><obj-link class="object-link" obj=@lot></obj-link></td>
+                            <td>@lot.Price</td>
+                            <td>@lot.Ending</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr class="table-null">
+                        <td colspan="3">@Localizer["NoLots"]</td>
+                    </tr>
+                }
+
+            </table>
+            <table cellspacing="0" cellpadding="4" id="wonLotsTable" style="display:none">
+                <tr class="table-header">
+                    <th>@Localizer["Name"]</th>
+                    <th>@Localizer["Price"]</th>
+                    <th>@Localizer["Ending"]</th>
+                </tr>
+                @{
+                    List<Lot> lots = Model.User.Bids.OrderByDescending(b=>b.Time).Select(b => b.Lot).Distinct().ToList();
+                    bool winSmth = false;
+                    foreach (Lot lot in lots)
+                    {
+                        if (Model.User.Id == lot.Bids.First().User.Id && !lot.IsActual())
+                        {
+                            winSmth = true;
+                            <tr class="table-row">
+                                <td><obj-link class="object-link" obj=@lot></obj-link></td>
+                                <td>@lot.Price</td>
+                                <td>@lot.Ending</td>
+                            </tr>
+                        }
+                    }
+                    if (!winSmth)
+                    {
+                        <tr class="table-null">
+                            <td colspan="3">@Localizer["NoLots"]</td>
+                        </tr>
+                    }
+                }
+            </table>
+        </div>
     </div>
 </div>
+

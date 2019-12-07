@@ -18,7 +18,7 @@ using Auction.Hubs;
 using Microsoft.AspNetCore.SignalR;
 
 namespace Auction.Controllers
-{   
+{
     public class LotsController : Controller
     {
         private ApplicationContext db;
@@ -27,6 +27,7 @@ namespace Auction.Controllers
         private IStringLocalizer<LotsController> _localizer;
         private Dict _dict;
         private IHubContext<NotificationHub> _hubContext;
+        const int pageSize = 5;
 
         public LotsController(ApplicationContext context, UserManager<User> userManager, IHostingEnvironment appEnvironment, Dict dict, IStringLocalizer<LotsController> localizer, IHubContext<NotificationHub> hubContext)
         {
@@ -39,21 +40,42 @@ namespace Auction.Controllers
         }
 
         [HttpGet]
-        public ViewResult ActualLots()
+        public ActionResult Actual(int? id)
         {
-            IEnumerable<Lot> lots = db.Lots.Include(l => l.User).Where(l => l.IsActual()).OrderByDescending(l => l.Exposing);     
-            return View("LotsList", lots);
+            int page = id ?? 0;
+            if (HttpContext.Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+            {
+                return PartialView("_LotsListPartial", GetActualItemsPage(page));
+            }
+            return View("LotsList", GetActualItemsPage(page));
+        }
+
+        private IEnumerable<Lot> GetActualItemsPage(int page = 0)
+        {
+            int itemsToSkip = page * pageSize;
+            return db.Lots.Include(l => l.User).Where(l => l.IsActual()).OrderBy(l => l.Ending).Skip(itemsToSkip).Take(pageSize).ToList();
         }
 
         [HttpGet]
-        public ViewResult EndedLots()
+        public ActionResult Ended(int? id)
         {
-            IEnumerable<Lot> lots = db.Lots.Include(l => l.User).Where(l => !l.IsActual()).OrderByDescending(l => l.Ending);
-            return View("LotsList", lots);
+            int page = id ?? 0;
+            if (HttpContext.Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+            {
+                return PartialView("_LotsListPartial", GetEndedItemsPage(page));
+            }
+            return View("LotsList", GetEndedItemsPage(page));
+        }
+
+        private IEnumerable<Lot> GetEndedItemsPage(int page = 0)
+        {
+            int itemsToSkip = page * pageSize;
+            return db.Lots.Include(l => l.User).Where(l => !l.IsActual()).OrderByDescending(l => l.Ending).Skip(itemsToSkip).Take(pageSize).ToList();
         }
 
         [HttpGet]
-        public ActionResult LotDetail(int? id)
+        [Route("Lot/{id:int}")]
+        public ActionResult Detail(int? id)
         {
             if (id != null)
             {
@@ -73,10 +95,12 @@ namespace Auction.Controllers
         }
 
         [Authorize]
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
+
         [HttpPost]     
         public async Task<IActionResult> Create(CreateLotViewModel model)
         {
@@ -113,7 +137,7 @@ namespace Auction.Controllers
                 }
                 db.Lots.Update(lot);
                 db.SaveChanges();
-                return RedirectToAction("ActualLots");
+                return RedirectToAction("Actual");
             }
             return View();
         }
@@ -145,9 +169,9 @@ namespace Auction.Controllers
                     await _hubContext.Clients.User(reciever.Id).SendAsync("Notify", user.UserName + " has broken your bid on the " + lot.Name);
                 }
                 
-                return RedirectToAction("LotDetail", new {id = lot.Id});
+                return RedirectToAction("Detail", new {id = lot.Id});
             }
-            return RedirectToAction("LotDetail", new { id = lot.Id });
+            return RedirectToAction("Detail", new { id = lot.Id });
         }
 
         [AcceptVerbs("Get", "Post")]
@@ -172,7 +196,7 @@ namespace Auction.Controllers
                     db.Bids.RemoveRange(db.Bids.Where(b => b.Lot.Id == id));                    
                     db.Lots.Remove(lot);
                     await db.SaveChangesAsync();
-                    return RedirectToAction("ActualLots");
+                    return RedirectToAction("Actual");
                 }
             }
             return NotFound();

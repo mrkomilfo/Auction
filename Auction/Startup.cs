@@ -118,7 +118,19 @@ namespace Auction
             //app.UseMvcWithDefaultRoute();
             app.UseMvc(routes =>
             {
-                routes.MapRoute(name: "default", template: "{controller=Lots}/{action=ActualLots}/{id?}");               
+                routes.MapRoute(name: "default", template: "{controller=Lots}/{action=Actual}/{id?}");
+                routes.MapRoute(name: "actualLots", template: "Lots/Actual/{id:int?}", defaults: new { Controller = "Lots", Action = "Actual"});
+                routes.MapRoute(name: "endedLots", template: "Lots/Ended", defaults: new {Controller = "Lots", Action = "Ended" });
+                routes.MapRoute(name: "lotDetail", template: "Lot/{id:int}", defaults: new { Controller = "Lots", Action = "Detail" });
+                routes.MapRoute(name: "lotCreate", template: "Lot/Create", defaults: new { Controller = "Lots", Action = "Create" });
+                routes.MapRoute(name: "usersList", template: "Users/Index", defaults: new { Controller = "Users", Action = "Index" });
+                routes.MapRoute(name: "profile", template: "Users/Profile/{id}", defaults: new { Controller = "Users", Action = "Profile" });
+                routes.MapRoute(name: "roles", template: "Users/Roles", defaults: new { Controller = "Users", Action = "Roles" });
+                routes.MapRoute(name: "myProfile", template: "Account/Profile", defaults: new { Controller = "Account", Action = "Profile" });
+                routes.MapRoute(name: "login", template: "Account/Login", defaults: new { Controller = "Account", Action = "Login" });
+                routes.MapRoute(name: "register", template: "Account/Register", defaults: new { Controller = "Account", Action = "Register" });
+                routes.MapRoute(name: "edit", template: "Account/Edit", defaults: new { Controller = "Account", Action = "Edit" });
+                routes.MapRoute(name: "changePassword", template: "Account/ChangePassword", defaults: new { Controller = "Account", Action = "ChangePassword" });
             });
 
             /*using (var scope = app.ApplicationServices.CreateScope())

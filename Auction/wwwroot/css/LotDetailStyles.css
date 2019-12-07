@@ -31,6 +31,10 @@
     object-fit: cover;
 }
 
+.lot-image img:hover {
+    cursor: pointer;
+}
+
 .lot-short-desc {
     display: flex;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -44,7 +48,7 @@
 }
 
 #lot-table-left tr{
-    height: 60px;
+    height: 51px;
 }
 
 #lot-table-right {
@@ -53,7 +57,7 @@
 }
 
 #lot-table-right tr{
-    height: 60px;
+    height: 51px;
 }
 
 .lot-short-desc-title {

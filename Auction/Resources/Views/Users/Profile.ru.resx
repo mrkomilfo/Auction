@@ -120,6 +120,9 @@
   <data name="BidAmount" xml:space="preserve">
     <value>Размер ставки</value>
   </data>
+  <data name="Bids" xml:space="preserve">
+    <value>Ставки</value>
+  </data>
   <data name="ChangePassword" xml:space="preserve">
     <value>Сменить пароль</value>
   </data>
@@ -132,14 +135,11 @@
   <data name="Ending" xml:space="preserve">
     <value>Завершение</value>
   </data>
+  <data name="ExpodedLots" xml:space="preserve">
+    <value>Выставленные лоты</value>
+  </data>
   <data name="Lot" xml:space="preserve">
     <value>Лот</value>
-  </data>
-  <data name="MyBids" xml:space="preserve">
-    <value>Мои ставки</value>
-  </data>
-  <data name="MyLots" xml:space="preserve">
-    <value>Мои лоты</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Название</value>
@@ -171,10 +171,7 @@
   <data name="UserName" xml:space="preserve">
     <value>Имя пользователя</value>
   </data>
-  <data name="UsersBids" xml:space="preserve">
-    <value>Ставик пользователя</value>
-  </data>
-  <data name="UsersLots" xml:space="preserve">
-    <value>Лоты пользователя</value>
+  <data name="WonLots" xml:space="preserve">
+    <value>Выигранные лоты</value>
   </data>
 </root>

@@ -12,7 +12,7 @@ namespace Auction.Data
         {
             fuel = new List<string>() { localizer["petrol"], localizer["diesel"] , localizer["electro"]};
             transmission = new List<string>() { localizer["automatic"], localizer["manual"] };
-            body = new List<string>() { localizer["SUV"], localizer["cabriolet"], localizer["coupe"], localizer["limousine"], localizer["liftback"], localizer["minibus"], localizer["minivan"], localizer["pickup"], localizer["roadstar"], localizer["sedan"], localizer["stationWagon"], localizer["hatchback"], localizer["other"] };
+            body = new List<string>() { localizer["SUV"], localizer["cabriolet"], localizer["coupe"], localizer["limousine"], localizer["liftback"], localizer["minibus"], localizer["minivan"], localizer["pickup"], localizer["roadster"], localizer["sedan"], localizer["stationWagon"], localizer["hatchback"], localizer["other"] };
             drive = new List<string>() { localizer["rear"], localizer["frontWheel"], localizer["fourWheel"], };
         }
 

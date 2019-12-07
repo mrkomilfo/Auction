@@ -15,6 +15,7 @@
     <link href="~/css/ProfileStyles.css" rel="stylesheet" type="text/css">
     <link href="~/css/UsersListStyles.css" rel="stylesheet" type="text/css">
     <link href="~/css/GeneralStyles.css" rel="stylesheet" type="text/css">
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 </head>
 <body>
     <header>
@@ -22,17 +23,17 @@
             <div class="nav-bar">
                 <ul class="nav-list">
                     <li class="nav-item">
-                        <a class="nav-ref" asp-controller="Lots" asp-action="ActualLots">
+                        <a class="nav-ref" asp-controller="Lots" asp-action="Actual">
                             <div>@Localizer["ActualLots"]</div>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-ref" asp-controller="Lots" asp-action="EndedLots">
+                        <a class="nav-ref" asp-controller="Lots" asp-action="Ended">
                             <div>@Localizer["EndedLots"]</div>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-ref" asp-controller="Lots" asp-action="Create">
+                        <a class="nav-ref" asp-controller="Lot" asp-action="Create">
                             <div>@Localizer["CreateLot"]</div>
                         </a>
                     </li>
@@ -88,8 +89,6 @@
     <main>
         @RenderBody()
     </main>
-    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <!--RenderSection("Scripts", required: false)-->
 </body>
 </html>
 <script src="~/js/signalr.min.js"></script>
@@ -98,7 +97,10 @@
         .withUrl("/notifications")
         .build();
     hubConnection.on('Notify', function (message) {
-            alert(message);
+        alert(message);
     });
     hubConnection.start();
 </script>
+@RenderSection("Scripts", false)
+
+
