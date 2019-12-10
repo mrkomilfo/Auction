@@ -27,9 +27,10 @@ namespace Auction.Controllers
         private IStringLocalizer<LotsController> _localizer;
         private Dict _dict;
         private IHubContext<NotificationHub> _hubContext;
+        private IHubContext<UpdateHub> _updateHubContext;
         const int pageSize = 5;
 
-        public LotsController(ApplicationContext context, UserManager<User> userManager, IHostingEnvironment appEnvironment, Dict dict, IStringLocalizer<LotsController> localizer, IHubContext<NotificationHub> hubContext)
+        public LotsController(ApplicationContext context, UserManager<User> userManager, IHostingEnvironment appEnvironment, Dict dict, IStringLocalizer<LotsController> localizer, IHubContext<NotificationHub> hubContext, IHubContext<UpdateHub> updateHubContext)
         {
             db = context;
             _userManager = userManager;
@@ -37,6 +38,7 @@ namespace Auction.Controllers
             _localizer = localizer;
             _dict = dict;
             _hubContext = hubContext;
+            _updateHubContext = updateHubContext;
         }
 
         [HttpGet]
@@ -165,10 +167,10 @@ namespace Auction.Controllers
 
                 if (lot.Bids.Count() >= 2)
                 {
-                    User reciever = lot.Bids.ElementAt(lot.Bids.Count() - 2).User;
+                    User reciever = lot.Bids.ElementAt(lot.Bids.Count() - 2).User;                  
                     await _hubContext.Clients.User(reciever.Id).SendAsync("Notify", user.UserName + " has broken your bid on the " + lot.Name);
                 }
-                
+                await _updateHubContext.Clients.AllExcept(user.Id).SendAsync("UpdateTable", lot.Id, bid.User.Id, bid.User.UserName, bid.NewPrice, bid.Time.ToString("dd.MM.yyyy HH:mm:ss"));
                 return RedirectToAction("Detail", new {id = lot.Id});
             }
             return RedirectToAction("Detail", new { id = lot.Id });

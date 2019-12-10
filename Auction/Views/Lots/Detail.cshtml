@@ -93,30 +93,33 @@
     <div class="lot-bids">
         <div class="lot-bids-table-div">
             <p class="lot-main-desc-title">@Localizer["BidsHistory"]:</p>
-            <table cellspacing="0" cellpadding="3">
-                <tr class="table-header">
-                    <th>@Localizer["User"]</th>
-                    <th>@Localizer["NewPrice"]</th>
-                    <th>@Localizer["Time"]</th>
-                </tr>
-                @if (Model.Lot.Bids.Count > 0)
-                {
-                    foreach (var bid in Model.Lot.Bids.OrderByDescending(b => b.Time))
+            <table id="bidsTable" cellspacing="0" cellpadding="3">
+                <thead>
+                    <tr id="bidsTableHeader" class="table-header">
+                        <th>@Localizer["User"]</th>
+                        <th>@Localizer["NewPrice"]</th>
+                        <th>@Localizer["Time"]</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    @if (Model.Lot.Bids.Count > 0)
                     {
-                        <tr class="table-row">
-                            <td><obj-link class="object-link" obj=@bid.User></obj-link></td>
-                            <td>@bid.NewPrice</td>
-                            <td>@bid.Time</td>
+                        foreach (var bid in Model.Lot.Bids.OrderByDescending(b => b.Time))
+                        {
+                            <tr class="table-row">
+                                <td><obj-link class="object-link" obj=@bid.User></obj-link></td>
+                                <td>@bid.NewPrice</td>
+                                <td>@bid.Time</td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr id="noBids_tr" class="table-null">
+                            <td colspan="4">@Localizer["NoBids"]</td>
                         </tr>
                     }
-                }
-                else
-                {
-                    <tr class="table-null">
-                        <td colspan="4">@Localizer["NoBids"]</td>
-                    </tr>
-                }
-
+                </tbody>
             </table>
         </div>
         @if (Model.Lot.IsActual() && User.Identity.IsAuthenticated)
@@ -138,3 +141,38 @@
         }
     </div>
 </div>
+<script src="~/js/signalr.min.js"></script>
+<script>
+    const updateHubConnection = new signalR.HubConnectionBuilder()
+        .withUrl("/updates")
+        .build();
+    updateHubConnection.on('UpdateTable', function (lot_id, user_id, user_name, price, time) {
+        var model_id = lot_id;
+        if (model_id == lot_id) {
+            var user_td = document.createElement('td');
+            var user_link = document.createElement('a');
+            user_link.classList.add('object-link');
+            var link_text = document.createTextNode(user_name);
+            user_link.appendChild(link_text);
+            user_link.href = "Users/Profile/" + user_id;
+            user_td.appendChild(user_link);
+            var price_td = document.createElement('td');
+            var price_text = document.createTextNode(price);
+            price_td.appendChild(price_text);
+            var time_td = document.createElement('td');
+            var time_text = document.createTextNode(time);
+            time_td.appendChild(time_text);
+            var row = document.createElement('tr');
+            row.append(user_td, price_td, time_td);
+            row.classList.add('table-row');
+            var noBids = document.getElementById('noBids_tr');
+            if (noBids) {
+                noBids.parentNode.removeChild(noBids);
+            }
+            var body = document.getElementById('tableBody');
+            //debugger;
+            body.insertBefore(row, body.firstChild);
+        }
+    });    
+    updateHubConnection.start();
+</script>

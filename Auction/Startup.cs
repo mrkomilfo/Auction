@@ -110,6 +110,7 @@ namespace Auction
             app.UseSignalR(route =>
             {
                 route.MapHub<NotificationHub>("/notifications");
+                route.MapHub<UpdateHub>("/updates");
             });
 
             var locOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
