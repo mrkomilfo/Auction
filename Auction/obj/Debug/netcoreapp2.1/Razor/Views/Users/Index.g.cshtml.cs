@@ -113,7 +113,7 @@ using Microsoft.AspNetCore.Mvc.Localization;
             WriteLiteral("        <tr class=\"table-row\">\r\n            <td>");
             EndContext();
             BeginContext(412, 51, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("obj-link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "edbcb46c018747ed8e39de345672c1fc", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("obj-link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6507413c582a4392999927f69792c6d6", async() => {
             }
             );
             __Auction_TagHelpers_ObjLinkTagHelper = CreateTagHelper<global::Auction.TagHelpers.ObjLinkTagHelper>();

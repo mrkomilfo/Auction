@@ -138,7 +138,7 @@ namespace Auction.Controllers
         [HttpGet]
         public async Task<IActionResult> Profile(string id)
         {
-            User user = db.Users.Include(u => u.Lots).Include(u => u.Bids).ThenInclude(u => u.Lot).FirstOrDefault(u => u.Id == id);
+            User user = db.Users.Include(u => u.Lots).Include(u => u.Bids).ThenInclude(u => u.Lot).ThenInclude(u => u.Bids).ThenInclude(b => b.User).FirstOrDefault(u => u.Id == id);
             if (user == null)
             {
                 return RedirectToAction("Index");
