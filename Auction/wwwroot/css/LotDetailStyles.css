@@ -86,6 +86,7 @@
 .lot-bids{
     width: 100%;
     display: flex;
+    margin-bottom: 16px;
 }
 
 .lot-bids-table-div {

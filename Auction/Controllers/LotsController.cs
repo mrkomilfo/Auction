@@ -28,7 +28,7 @@ namespace Auction.Controllers
         private Dict _dict;
         private IHubContext<NotificationHub> _hubContext;
         private IHubContext<UpdateHub> _updateHubContext;
-        const int pageSize = 5;
+        const int pageSize = 8;
 
         public LotsController(ApplicationContext context, UserManager<User> userManager, IHostingEnvironment appEnvironment, Dict dict, IStringLocalizer<LotsController> localizer, IHubContext<NotificationHub> hubContext, IHubContext<UpdateHub> updateHubContext)
         {
@@ -170,7 +170,8 @@ namespace Auction.Controllers
                     User reciever = lot.Bids.ElementAt(lot.Bids.Count() - 2).User;                  
                     await _hubContext.Clients.User(reciever.Id).SendAsync("Notify", user.UserName + " has broken your bid on the " + lot.Name);
                 }
-                await _updateHubContext.Clients.AllExcept(user.Id).SendAsync("UpdateTable", lot.Id, bid.User.Id, bid.User.UserName, bid.NewPrice, bid.Time.ToString("dd.MM.yyyy HH:mm:ss"));
+                await _updateHubContext.Clients.AllExcept(user.Id).SendAsync("UpdateTable", lot.Id, bid.User.Id, bid.User.UserName, bid.NewPrice,
+                    Convert.ToInt64(bid.Time.ToUniversalTime().Subtract(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalMilliseconds));
                 return RedirectToAction("Detail", new {id = lot.Id});
             }
             return RedirectToAction("Detail", new { id = lot.Id });

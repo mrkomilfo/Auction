@@ -1,5 +1,6 @@
 ﻿@model LotDetailViewModel
 @using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.AspNetCore.Localization
 @inject IViewLocalizer Localizer
 
 <div class="lot-body">
@@ -60,13 +61,13 @@
                 </tr>
                 <tr>
                     <td class="lot-short-desc-title">@Localizer["Price"]:</td>
-                    <td class="lot-short-desc-data">@Model.Lot.Price BYN</td>
+                    <td id="priceLabel" class="lot-short-desc-data">@Model.Lot.Price BYN</td>
                 </tr>
                 <tr>
                     <td class="lot-short-desc-title">@(Model.Lot.IsActual() ? Localizer["Leader"].Value + ":" : Localizer["Winner"].Value + ":")</td>
                     @if (Model.Lot.Bids.Any())
                     {
-                        <td class="lot-short-desc-data"><obj-link class="object-link" obj=@Model.getLeader()></obj-link></td>
+                        <td id="leaderLabel" class="lot-short-desc-data"><obj-link class="object-link" obj=@Model.getLeader()></obj-link></td>
                     }
                     else
                     {
@@ -149,19 +150,24 @@
     updateHubConnection.on('UpdateTable', function (lot_id, user_id, user_name, price, time) {
         var model_id = lot_id;
         if (model_id == lot_id) {
+
             var user_td = document.createElement('td');
             var user_link = document.createElement('a');
             user_link.classList.add('object-link');
             var link_text = document.createTextNode(user_name);
             user_link.appendChild(link_text);
-            user_link.href = "Users/Profile/" + user_id;
+            user_link.href = "/Users/Profile/" + user_id;
             user_td.appendChild(user_link);
+
             var price_td = document.createElement('td');
             var price_text = document.createTextNode(price);
             price_td.appendChild(price_text);
+
+            var date_time = new Date(time);
             var time_td = document.createElement('td');
-            var time_text = document.createTextNode(time);
+            var time_text = document.createTextNode(date_time.toLocaleString('@(Context.Features.Get<IRequestCultureFeature>().RequestCulture.UICulture.Name)').replace(',', ''));
             time_td.appendChild(time_text);
+
             var row = document.createElement('tr');
             row.append(user_td, price_td, time_td);
             row.classList.add('table-row');
@@ -170,9 +176,16 @@
                 noBids.parentNode.removeChild(noBids);
             }
             var body = document.getElementById('tableBody');
-            //debugger;
             body.insertBefore(row, body.firstChild);
+
+            var leader_label = document.getElementById('leaderLabel');
+            leader_label.removeChild(leader_label.firstChild);
+            leader_label.appendChild(user_link.cloneNode(true));
+
+            var price_label = document.getElementById('priceLabel');
+            price_label.removeChild(price_label.firstChild);
+            price_label.appendChild(price_text.cloneNode(true));
         }
-    });    
+    });
     updateHubConnection.start();
 </script>

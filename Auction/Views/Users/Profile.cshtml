@@ -147,7 +147,7 @@
                     bool winSmth = false;
                     foreach (Lot lot in lots)
                     {
-                        if (Model.User.Id == lot.Bids.First().User.Id && !lot.IsActual())
+                        if (Model.User == lot.Bids.First().User && !lot.IsActual())
                         {
                             winSmth = true;
                             <tr class="table-row">
