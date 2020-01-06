@@ -27,14 +27,11 @@ namespace Auction
             Configuration = configuration;
             this.env = env;
         }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+        
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<CookiePolicyOptions>(options =>
             {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
@@ -71,7 +68,6 @@ namespace Auction
             }).AddEntityFrameworkStores<ApplicationContext>();
             services.Configure<SecurityStampValidatorOptions>(options =>
             {
-                // enables immediate logout, after updating the user's stat.
                 options.ValidationInterval = TimeSpan.Zero;
             });
            
@@ -88,8 +84,7 @@ namespace Auction
 
             services.AddSingleton<IHostingEnvironment>(env);
         }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
@@ -115,13 +110,12 @@ namespace Auction
 
             var locOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
             app.UseRequestLocalization(locOptions.Value);
-            //app.UseRequestLocalization();
-            //app.UseMvcWithDefaultRoute();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(name: "default", template: "{controller=Lots}/{action=Actual}/{id?}");
                 routes.MapRoute(name: "actualLots", template: "Lots/Actual/{id:int?}", defaults: new { Controller = "Lots", Action = "Actual"});
-                routes.MapRoute(name: "endedLots", template: "Lots/Ended", defaults: new {Controller = "Lots", Action = "Ended" });
+                routes.MapRoute(name: "endedLots", template: "Lots/Ended/{id:int?}", defaults: new {Controller = "Lots", Action = "Ended" });
+                routes.MapRoute(name: "loadLots", template: "Lots/Load/{id:int?}", defaults: new { Controller = "Lots", Action = "Load" });
                 routes.MapRoute(name: "lotDetail", template: "Lot/{id:int}", defaults: new { Controller = "Lots", Action = "Detail" });
                 routes.MapRoute(name: "lotCreate", template: "Lot/Create", defaults: new { Controller = "Lots", Action = "Create" });
                 routes.MapRoute(name: "usersList", template: "Users/Index", defaults: new { Controller = "Users", Action = "Index" });
@@ -133,12 +127,6 @@ namespace Auction
                 routes.MapRoute(name: "edit", template: "Account/Edit", defaults: new { Controller = "Account", Action = "Edit" });
                 routes.MapRoute(name: "changePassword", template: "Account/ChangePassword", defaults: new { Controller = "Account", Action = "ChangePassword" });
             });
-
-            /*using (var scope = app.ApplicationServices.CreateScope())
-            {
-                var service = scope.ServiceProvider.GetRequiredService<IStringLocalizer>();
-                Dict.Init(service);
-            }*/       
         }
     }
 }

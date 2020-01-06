@@ -77,7 +77,7 @@ using Microsoft.AspNetCore.Mvc.Localization;
             WriteLiteral("\r\n<div class=\"listing-item\">\r\n    <div class=\"listing-item-image\">\r\n        ");
             EndContext();
             BeginContext(168, 165, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a78e555200bd40a4981377a68e23d394", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b678392c71054bea8af771137fd62f25", async() => {
                 BeginContext(236, 18, true);
                 WriteLiteral("\r\n            <img");
                 EndContext();
@@ -131,7 +131,7 @@ WriteAttributeValue("", 279, Model.Name, 279, 11, false);
             WriteLiteral("\r\n    </div>\r\n    <div class=\"listing-item-main\">\r\n        <p class=\"listing-item-main-top\">");
             EndContext();
             BeginContext(425, 52, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("obj-link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "abf71a1ac5664dbf84f39ccabe5ca2cf", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("obj-link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "425fca939939494793f715380f22d656", async() => {
             }
             );
             __Auction_TagHelpers_ObjLinkTagHelper = CreateTagHelper<global::Auction.TagHelpers.ObjLinkTagHelper>();

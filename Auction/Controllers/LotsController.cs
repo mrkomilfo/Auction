@@ -28,7 +28,8 @@ namespace Auction.Controllers
         private Dict _dict;
         private IHubContext<NotificationHub> _hubContext;
         private IHubContext<UpdateHub> _updateHubContext;
-        const int pageSize = 8;
+        const int pageSize = 6;
+        public static bool actual { get; set; }
 
         public LotsController(ApplicationContext context, UserManager<User> userManager, IHostingEnvironment appEnvironment, Dict dict, IStringLocalizer<LotsController> localizer, IHubContext<NotificationHub> hubContext, IHubContext<UpdateHub> updateHubContext)
         {
@@ -44,6 +45,7 @@ namespace Auction.Controllers
         [HttpGet]
         public ActionResult Actual(int? id)
         {
+            actual = true;
             int page = id ?? 0;
             if (HttpContext.Request.Headers["X-Requested-With"] == "XMLHttpRequest")
             {
@@ -61,6 +63,7 @@ namespace Auction.Controllers
         [HttpGet]
         public ActionResult Ended(int? id)
         {
+            actual = false;
             int page = id ?? 0;
             if (HttpContext.Request.Headers["X-Requested-With"] == "XMLHttpRequest")
             {
@@ -73,6 +76,18 @@ namespace Auction.Controllers
         {
             int itemsToSkip = page * pageSize;
             return db.Lots.Include(l => l.User).Where(l => !l.IsActual()).OrderByDescending(l => l.Ending).Skip(itemsToSkip).Take(pageSize).ToList();
+        }
+
+        [HttpGet]
+        public ActionResult Load(int? id)
+        {
+            if (actual == true)
+            {
+                return Actual(id);
+            }
+            else {
+                return Ended(id);
+            }
         }
 
         [HttpGet]

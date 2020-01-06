@@ -208,7 +208,7 @@ using Microsoft.AspNetCore.Mvc.Localization;
             WriteLiteral("                <tr>\r\n                    <td>");
             EndContext();
             BeginContext(2699, 126, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6e01e7d245cd4cb0bccaaac11cbe5b3d", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7e8350b2ed3249598878647d0105f5a3", async() => {
                 BeginContext(2804, 17, false);
 #line 66 "D:\ASP\Auction\Auction\Views\Users\Profile.cshtml"
                                                                                                                            Write(Localizer["Edit"]);
@@ -250,7 +250,7 @@ using Microsoft.AspNetCore.Mvc.Localization;
             WriteLiteral("</td>\r\n                    <td>");
             EndContext();
             BeginContext(2856, 116, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c1395b2b5c924b30bec5572bc0668c7d", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6b7e07528300430b9baf7521aa355048", async() => {
                 BeginContext(2941, 27, false);
 #line 67 "D:\ASP\Auction\Auction\Views\Users\Profile.cshtml"
                                                                                                        Write(Localizer["ChangePassword"]);
@@ -289,7 +289,7 @@ using Microsoft.AspNetCore.Mvc.Localization;
             WriteLiteral("                <tr>\r\n                    <td>");
             EndContext();
             BeginContext(3124, 126, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1f865bc793ab40c9a2ebb810d1791de9", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0cf713cc6e944f90a4591e4285855fea", async() => {
                 BeginContext(3228, 18, false);
 #line 73 "D:\ASP\Auction\Auction\Views\Users\Profile.cshtml"
                                                                                                                           Write(Localizer["Roles"]);
@@ -331,7 +331,7 @@ using Microsoft.AspNetCore.Mvc.Localization;
             WriteLiteral("</td>\r\n                    <td>\r\n                        ");
             EndContext();
             BeginContext(3307, 225, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "073a5fda5b02451a8f89bf27565b7d1d", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "378b8f7afbb34ac0a9e7f13c4368718b", async() => {
                 BeginContext(3377, 92, true);
                 WriteLiteral("\r\n                            <input class=\"action-link-default button-danger\" type=\"submit\"");
                 EndContext();
@@ -459,7 +459,7 @@ WriteAttributeValue("", 3476, Localizer["Delete"], 3476, 20, false);
             WriteLiteral("                        <tr class=\"table-row\">\r\n                            <td>");
             EndContext();
             BeginContext(4672, 54, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("obj-link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "226deba5723b48bb96b79577ea6c9e62", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("obj-link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "94763d104b364490871fe7d9c5fa3d88", async() => {
             }
             );
             __Auction_TagHelpers_ObjLinkTagHelper = CreateTagHelper<global::Auction.TagHelpers.ObjLinkTagHelper>();
@@ -573,7 +573,7 @@ __Auction_TagHelpers_ObjLinkTagHelper.Obj = bid.Lot;
             WriteLiteral("                        <tr class=\"table-row\">\r\n                            <td>");
             EndContext();
             BeginContext(5701, 50, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("obj-link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "53be1a42ddf2461db17b3d2f716fb7fa", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("obj-link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "af7047c148604515aae48d522aaaf07b", async() => {
             }
             );
             __Auction_TagHelpers_ObjLinkTagHelper = CreateTagHelper<global::Auction.TagHelpers.ObjLinkTagHelper>();
@@ -691,7 +691,7 @@ __Auction_TagHelpers_ObjLinkTagHelper.Obj = lot;
             WriteLiteral("                            <tr class=\"table-row\">\r\n                                <td>");
             EndContext();
             BeginContext(6993, 50, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("obj-link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1ab20dc483ef44bb981031a9166e4de6", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("obj-link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "437ca52e5b644251b05aa0c3e57ab9ce", async() => {
             }
             );
             __Auction_TagHelpers_ObjLinkTagHelper = CreateTagHelper<global::Auction.TagHelpers.ObjLinkTagHelper>();

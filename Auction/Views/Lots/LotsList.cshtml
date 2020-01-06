@@ -13,7 +13,7 @@ $(function () {
 
             $.ajax({
                 type: 'GET',
-                url: '/Lots/Ended/' + page,
+                url: '/Lots/Load/' + page,
                 success: function (data) {
                     if (data != '') {
                         $("#scrolList").append(data);
